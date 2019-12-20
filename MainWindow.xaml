@@ -22,7 +22,7 @@
 
         <Style TargetType="{x:Type TextBox}" x:Key="TbMinimalStyle">
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="Height" Value="18"/>
+            <Setter Property="Height" Value="20"/>
             <Setter Property="BorderBrush" Value="#67676B"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="{x:Null}"/>
@@ -123,13 +123,15 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0">
 
-                    <Label Content="Такт, с:" FontSize="18" Foreground="White"/>
-                    <TextBox x:Name="txtTact" Width="50" MaxLength="4" FontSize="18" VerticalAlignment="Center"
-                             TextChanged="txtTact_TextChanged" PreviewTextInput="txtTact_PreviewTextInput" Text="1"/>
+                    <!--<Label Content="Такт, с:" FontSize="18" Foreground="White"/>-->
+                    <TextBox x:Name="txtTact" Width="40" MaxLength="3" VerticalAlignment="Center"
+                             TextChanged="txtTact_TextChanged" PreviewTextInput="txtTact_PreviewTextInput" Text="1,0"
+                             Style="{StaticResource TbMinimalStyle}" IsReadOnly="True"/>
 
-                    <Label Content="Повторений:" FontSize="18" Foreground="White"/>
-                    <TextBox x:Name="txtRepeat" Width="50" MaxLength="2" FontSize="18" VerticalAlignment="Center"
-                             TextChanged="txtRepeat_TextChanged" PreviewTextInput="txtRepeat_PreviewTextInput" Text="2" />
+                    <!--<Label Content="Повторений:" FontSize="18" Foreground="White"/>-->
+                    <TextBox x:Name="txtRepeat" Width="25" MaxLength="2" VerticalAlignment="Center"
+                             TextChanged="txtRepeat_TextChanged" PreviewTextInput="txtRepeat_PreviewTextInput" Text="2" 
+                             Style="{StaticResource TbMinimalStyle}" IsReadOnly="True" />
 
                 </StackPanel>
                 
@@ -241,7 +243,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="0" BorderBrush="Transparent" >
+            <ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="0" BorderBrush="Transparent" ItemsSource="{Binding g_PlayListColl}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="200" Height="60" >
@@ -263,12 +265,12 @@
                                 </Grid.RowDefinitions>
 
                                 <Label  HorizontalAlignment="Center" Style="{StaticResource MainLbl}" 
-                                Content="{Binding}" FontSize="15" Grid.Row="0" />
+                                Content="{Binding AllHand}" FontSize="15" Grid.Row="0" />
 
                                 <Grid Background="White" Grid.Row="1" Margin="30,0"/>
 
                                 <Label  HorizontalAlignment="Center" Style="{StaticResource MainLbl}" 
-                                Content="{Binding}" FontSize="15" Grid.Row="2"/>
+                                Content="{Binding AllLeg}" FontSize="15" Grid.Row="2"/>
                             </Grid>
 
                         </Grid>
@@ -298,7 +300,7 @@
                     <TextBox x:Name="TbAddTaskInColl_Hand" 
                              Style="{StaticResource TbMinimalStyle}" 
                              Grid.Column="1" Grid.Row="0" MaxLength="15"
-                             PreviewTextInput="TbAddTaskInColl_PreviewTextInput"/>
+                             PreviewTextInput="TbAddTaskInColl_PreviewTextInput" Text="20"/>
                     <TextBox x:Name="TbAddTaskInColl_Leg" 
                              Style="{StaticResource TbMinimalStyle}" 
                              Grid.Column="1" Grid.Row="1" MaxLength="15"

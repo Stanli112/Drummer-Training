@@ -75,7 +75,7 @@ namespace CoordinationTraining
             wuw = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             wuw.Load();
 
-            
+            LbTaskColl.ItemsSource = g_PlayListColl;
         }
 
 
