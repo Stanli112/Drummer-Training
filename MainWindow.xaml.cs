@@ -18,9 +18,18 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using CoordinationTraining.Classes;
+using System.Windows.Media.Animation;
 
 namespace CoordinationTraining
 {
+    /// <summary>
+    /// Придумать файл настроек
+    /// Больше констант
+    /// Добавить скрытие, развёртывание окна и ресайз
+    /// Такт и кол-во повторов нужно добавить загрузгойиз файла настроек
+    /// Нормальное дабовление записей + возможность добавлять текущие записи 
+    /// И отдельный json в загрузку записей
+    /// </summary>
     public partial class MainWindow : Window
     {
         #region Title
@@ -55,14 +64,10 @@ namespace CoordinationTraining
         }
 
         private const int BitCount = 12;
-        private int Time = 470;
+        private int Tact = 470;
         private int Repeate = 0;
         private SoundPlayer wuw;
-
-        private Regex RegexDouble = new Regex(@"^([0-9]|\,)$");
-        private Regex RegexInt = new Regex(@"^([0-9])$");
-
-
+               
 
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
         private ObservableCollection<OneBit> BitColl = new ObservableCollection<OneBit>();
@@ -72,10 +77,13 @@ namespace CoordinationTraining
         {
             InitializeComponent();
 
+            Tact = Convert.ToInt32( Convert.ToDouble(txtTact.Text) * 1000);
+            Repeate = Convert.ToInt32(txtRepeat.Text);
+
             wuw = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             wuw.Load();
 
-            LbTaskColl.ItemsSource = g_PlayListColl;
+            //LbTaskColl.ItemsSource = g_PlayListColl;
         }
 
 
@@ -109,7 +117,7 @@ namespace CoordinationTraining
 
             for(int k = 0; k < Repeate * BitCount; k++)
             {
-                Thread.Sleep(Time);
+                Thread.Sleep(Tact);
                 wuw.Play();
                 Dispatcher.Invoke(() =>
                 {
@@ -149,7 +157,7 @@ namespace CoordinationTraining
                 double d = Convert.ToDouble(txtTact.Text);
                 if (d > 0)
                 {
-                    Time = Convert.ToInt32(d * 1000);
+                    Tact = Convert.ToInt32(d * 1000);
                     txtTact.Background = Brushes.White;
                 }
             }
@@ -159,38 +167,11 @@ namespace CoordinationTraining
             }
         }
 
-        private void txtTact_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Match match = RegexDouble.Match(e.Text);
-            if ((sender as TextBox).Text.Length >= 4 || !match.Success)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtRepeat_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Match match = RegexInt.Match(e.Text);
-            if ((sender as TextBox).Text.Length >= 2 || !match.Success)
-            {
-                e.Handled = true;
-            }
-        }
-
         private void TbAddTaskInColl_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (e.Text != "F" && e.Text != "L")
             {
                 e.Handled = true;
-            }
-        }
-
-        private void txtRepeat_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            int rep = Convert.ToInt32(txtRepeat.Text);
-            if (rep > 0)
-            {
-                Repeate = rep;
             }
         }
         
@@ -231,31 +212,19 @@ namespace CoordinationTraining
             CreateCoordinationTasks();
         }
 
-        private void BtnScrollDown_Click(object sender, RoutedEventArgs e)
-        {
-            BtnScrollDown.Visibility = Visibility.Hidden;
-            BtnScrollUp.Visibility = Visibility.Visible;
-        }
-
-        private void BtnScrollUp_Click(object sender, RoutedEventArgs e)
-        {
-            BtnScrollDown.Visibility = Visibility.Visible;
-            BtnScrollUp.Visibility = Visibility.Hidden;
-        }
-
         private void BtnAddTaskInColl_Click(object sender, RoutedEventArgs e)
         {
-            string hand = TbAddTaskInColl_Hand.Text.Replace(" ", "");
-            string leg = TbAddTaskInColl_Hand.Text.Replace(" ", "");
+            //string hand = TbAddTaskInColl_Hand.Text.Replace(" ", "");
+            //string leg = TbAddTaskInColl_Hand.Text.Replace(" ", "");
 
-            if(hand.Length != 12 && leg.Length != 12)
-            {
-                return;
-            }
+            //if(hand.Length != 12 && leg.Length != 12)
+            //{
+            //    return;
+            //}
 
-            CoordinationTask cTask = new CoordinationTask(hand, leg);
+            //CoordinationTask cTask = new CoordinationTask(hand, leg);
 
-            g_PlayListColl.Add(cTask);
+            //g_PlayListColl.Add(cTask);
         }
         void FillLabelOnMainWindow(ObservableCollection<OneBit> arBits)
         {
@@ -264,6 +233,60 @@ namespace CoordinationTraining
                 ((Label)spHand.Children[i]).Content = arBits[i].hand;
                 ((Label)spLeg.Children[i]).Content = arBits[i].leg;
             }
+        }
+
+        private void BtnSTakt_Click(object sender, RoutedEventArgs e)
+        {
+            double tact = Convert.ToDouble( txtTact.Text );
+            if (((Button)sender).Name == "BtnTaktMinus")
+            {
+                if(tact > 0.3)
+                {
+                    tact -= 0.1;
+                }
+            }
+            if (((Button)sender).Name == "BtnTaktPlus")
+            {
+                if (tact < 2.0)
+                {
+                    tact += 0.1;
+                }
+            }
+            txtTact.Text = tact.ToString();
+            Tact = Convert.ToInt32(tact * 1000);
+        }
+
+        private void BtnSRepeat_Click(object sender, RoutedEventArgs e)
+        {
+            int rep = Convert.ToInt32(txtRepeat.Text);
+            if (((Button)sender).Name == "BtnRepeatMinus")
+            {
+                if (rep > 1 )
+                {
+                    rep -= 1;
+                }
+            }
+            if (((Button)sender).Name == "BtnRepeatPlus")
+            {
+                if (rep < 5.0)
+                {
+                    rep += 1;
+                }
+            }
+            txtRepeat.Text = rep.ToString();
+            Repeate = rep;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (GridRightMenu.Width > 0)
+            {
+                BeginStoryboard((Storyboard)this.FindResource("CloseTaskColl"));
+            }
+            else
+            {
+                BeginStoryboard((Storyboard)this.FindResource("OpenTaskColl"));
+            }            
         }
     }
 }
