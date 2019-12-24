@@ -72,6 +72,7 @@ namespace CoordinationTraining
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
         private ObservableCollection<OneBit> BitColl = new ObservableCollection<OneBit>();
 
+        Settings settings;
 
         public MainWindow()
         {
