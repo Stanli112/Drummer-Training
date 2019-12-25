@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoordinationTraining"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         MinWidth="1200" MinHeight="600"
         Title="MyManager" Height="800" Width="1500"
         Background="#3E3E42"
@@ -238,7 +239,7 @@
                             Click="BtnSRepeat_Click"/>
                     
                     <TextBox x:Name="txtRepeat" Width="25" MaxLength="1" VerticalAlignment="Center" Text="2" 
-                             Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" Margin="5,0"/>
+                             Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" Margin="5,0" />
 
                     <Button x:Name="BtnRepeatPlus" Width="25" Height="25" Style="{StaticResource BtnManageBarPlus}"
                             Click="BtnSRepeat_Click"/>

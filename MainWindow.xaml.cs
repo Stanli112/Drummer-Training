@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using CoordinationTraining.Classes;
 using System.Windows.Media.Animation;
+using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CoordinationTraining
 {
@@ -55,6 +58,11 @@ namespace CoordinationTraining
         {
             Close();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
         #endregion
 
         enum BitChoice
@@ -63,30 +71,36 @@ namespace CoordinationTraining
             RIGHT
         }
 
+
+        private readonly string fileName = "Settings.json";
+        private readonly string defaultPathFolder = SetDefaultPathFolder();
+
         private const int BitCount = 12;
         private int Tact = 470;
         private int Repeate = 0;
         private SoundPlayer wuw;
-               
 
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
         private ObservableCollection<OneBit> BitColl = new ObservableCollection<OneBit>();
-
-        Settings settings;
+        
+        public Settings settings;
 
         public MainWindow()
         {
             InitializeComponent();
+            
+            LoadSettings();
 
+            //txtRepeat.Text..SetBinding(txtRepeat.Text, settings.RepeatCount);
             Tact = Convert.ToInt32( Convert.ToDouble(txtTact.Text) * 1000);
-            Repeate = Convert.ToInt32(txtRepeat.Text);
+            //Repeate = Convert.ToInt32(settings.RepeatCount);//txtRepeat.Text);
 
             wuw = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             wuw.Load();
-
             //LbTaskColl.ItemsSource = g_PlayListColl;
         }
 
+       
 
         private void SetForegroundColor(StackPanel sp, SolidColorBrush color)
         {
@@ -288,6 +302,63 @@ namespace CoordinationTraining
             {
                 BeginStoryboard((Storyboard)this.FindResource("OpenTaskColl"));
             }            
+        }
+
+        /// <summary> Возвращает дефолтный путь к папке с файлами </summary>
+        static string SetDefaultPathFolder()
+        {
+            string _path = Directory.GetCurrentDirectory() + "\\Files";
+            if (!Directory.Exists(_path))
+            {
+                Directory.CreateDirectory(_path);
+            }
+            return _path;
+        }
+        /// <summary> Загрузка настроек из файла в settings </summary>
+        bool LoadSettings()
+        {
+            if(!CheckDefaultFolderAndFile())
+            {
+                settings = new Settings();
+            }
+            else
+            {
+                string _settings = File.ReadAllText($"{defaultPathFolder}\\{fileName}");
+                if (_settings.Length != 0)
+                {
+                    settings = JsonConvert.DeserializeObject<Settings>(_settings);
+                }
+                else
+                {
+                    settings = new Settings();
+                }                
+            }
+
+            return true;
+        }
+        /// <summary> Сохранение настроек из settings в файла </summary>
+        bool SaveSettings()
+        {
+            CheckDefaultFolderAndFile();
+            string json = JsonConvert.SerializeObject(settings);
+            File.WriteAllText($"{defaultPathFolder}\\{fileName}", json);
+            return true;
+        }
+        /// <summary> Проверяет наличие дефолтной папки с файлом настроек,
+        ///  если таковых нет - они будут созданы </summary>
+        bool CheckDefaultFolderAndFile()
+        {
+            bool result = true;
+            if (!Directory.Exists(defaultPathFolder))
+            {
+                Directory.CreateDirectory(defaultPathFolder);
+            }
+            if (!File.Exists($"{defaultPathFolder}\\{fileName}"))
+            {
+                File.Create($"{defaultPathFolder}\\{fileName}");
+                result = false;
+            }
+            return result;
         }
     }
 }
