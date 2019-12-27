@@ -61,7 +61,8 @@ namespace CoordinationTraining
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            SaveSettings();
+            settings.SaveSettings();
+            settings.SaveTrainingColl(g_PlayListColl);
         }
         #endregion
 
@@ -72,68 +73,43 @@ namespace CoordinationTraining
         }
 
 
-        private readonly string fileName = "Settings.json";
-        private readonly string defaultPathFolder = SetDefaultPathFolder();
+        private readonly int BitCount = 12;
 
-        private const int BitCount = 12;
-        private int Tact = 470;
-        private int Repeate = 0;
-        private SoundPlayer wuw;
+        /// <summary> Звук метронома - используется в тренеровке </summary>
+        private SoundPlayer MetronomeSound;
+        /// <summary> Хранит настройки проекта </summary>        
+        private Settings settings = new Settings();
 
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
-        private ObservableCollection<OneBit> BitColl = new ObservableCollection<OneBit>();
-        
-        public Settings settings;
+
 
         public MainWindow()
         {
             InitializeComponent();
             
-            LoadSettings();
+            settings.LoadSettings(ref settings);
+            settings.LoadTrainingColl(ref g_PlayListColl);
 
-            //txtRepeat.Text..SetBinding(txtRepeat.Text, settings.RepeatCount);
-            Tact = Convert.ToInt32( Convert.ToDouble(txtTact.Text) * 1000);
-            //Repeate = Convert.ToInt32(settings.RepeatCount);//txtRepeat.Text);
+            GetControlsData(settings);
 
-            wuw = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
-            wuw.Load();
-            //LbTaskColl.ItemsSource = g_PlayListColl;
+            MetronomeSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
+            MetronomeSound.Load();
+
+            LbTaskColl.ItemsSource = g_PlayListColl;
         }
 
-       
 
-        private void SetForegroundColor(StackPanel sp, SolidColorBrush color)
-        {
-            Label selLbl;
 
-            for (int i = 0; i < sp.Children.Count; i++)
-            {
-                if (sp.Children[i].GetType().Name == "Label")
-                {
-                    selLbl = (Label)sp.Children[i];
-                    selLbl.Foreground = color;
-                }
-            }
-        }
+        #region Центральная панель
 
-        private void SetLabelColor(StackPanel sp, int numb, SolidColorBrush color)
-        {
-            if(numb < 0)
-            {
-                return;
-            }
-
-            ((Label)sp.Children[numb]).Foreground = color;
-        }
-       
         private void Start()
         {
             int i = 0;
 
-            for(int k = 0; k < Repeate * BitCount; k++)
+            for(int k = 0; k < settings.RepeatCount * BitCount; k++)
             {
-                Thread.Sleep(Tact);
-                wuw.Play();
+                Thread.Sleep(settings.Amplitude);
+                MetronomeSound.Play();
                 Dispatcher.Invoke(() =>
                 {
                     SetLabelColor(spHand, i, Brushes.Green);
@@ -164,24 +140,6 @@ namespace CoordinationTraining
                 SetLabelColor(spLeg, spLeg.Children.Count - 1, Brushes.White);
             });
         }
-
-        private void txtTact_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                double d = Convert.ToDouble(txtTact.Text);
-                if (d > 0)
-                {
-                    Tact = Convert.ToInt32(d * 1000);
-                    txtTact.Background = Brushes.White;
-                }
-            }
-            catch
-            {
-                txtTact.Background = Brushes.Red;
-            }
-        }
-
         private void TbAddTaskInColl_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (e.Text != "F" && e.Text != "L")
@@ -189,86 +147,44 @@ namespace CoordinationTraining
                 e.Handled = true;
             }
         }
-        
         private void PlayStop_Click(object sender, RoutedEventArgs e)
         {
             isEnable(false);
             Task.Run(() => Start());
         }
-        private void isEnable(bool isEnable)
-        {
-            PlayStop.IsEnabled = isEnable;
-            txtRepeat.IsEnabled = isEnable;
-        }
-
-        private void CreateCoordinationTasks()
-        {
-            CoordinationTask t = new CoordinationTask();
-            var rand = new Random();
-            OneBit ob1 = new OneBit() { hand = "L", leg = "R" };
-            OneBit ob2 = new OneBit() { hand = "L", leg = "L" };
-            OneBit ob3 = new OneBit() { hand = "R", leg = "L" };
-            OneBit ob4 = new OneBit() { hand = "R", leg = "R" };
-            ObservableCollection<OneBit> coll = new ObservableCollection<OneBit>();
-            coll.Add(ob1);
-            coll.Add(ob2);
-            coll.Add(ob3);
-            coll.Add(ob4);
-
-            for ( int i = 0; i < 12; i++)
-            {
-                t.AddInOneBitColl(coll[rand.Next(coll.Count)]);
-            }
-            FillLabelOnMainWindow(t.GetOneBitColl());
-        }
-
         private void BtnRandom_Click(object sender, RoutedEventArgs e)
         {
-            CreateCoordinationTasks();
+            CreateRandomCoordinationTasks();
         }
-
-        private void BtnAddTaskInColl_Click(object sender, RoutedEventArgs e)
+        
+        /// <summary> Добавляет в глобальную коллекцию тренеровку с панелей </summary>
+        private void BtnAddToColl_Click(object sender, RoutedEventArgs e)
         {
-            //string hand = TbAddTaskInColl_Hand.Text.Replace(" ", "");
-            //string leg = TbAddTaskInColl_Hand.Text.Replace(" ", "");
-
-            //if(hand.Length != 12 && leg.Length != 12)
-            //{
-            //    return;
-            //}
-
-            //CoordinationTask cTask = new CoordinationTask(hand, leg);
-
-            //g_PlayListColl.Add(cTask);
+            g_PlayListColl.Add(new CoordinationTask(GetLabelOnMainWindow()));
         }
-        void FillLabelOnMainWindow(ObservableCollection<OneBit> arBits)
+        #endregion
+
+        #region Левая менюшка с Амплитудой и Повторами
+
+        private void BtnSAmplitude_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < BitCount; i++)
+            double amp = Convert.ToDouble(txtAmplitude.Text );
+            if (((Button)sender).Name == "BtnAmplitudeMinus")
             {
-                ((Label)spHand.Children[i]).Content = arBits[i].hand;
-                ((Label)spLeg.Children[i]).Content = arBits[i].leg;
-            }
-        }
-
-        private void BtnSTakt_Click(object sender, RoutedEventArgs e)
-        {
-            double tact = Convert.ToDouble( txtTact.Text );
-            if (((Button)sender).Name == "BtnTaktMinus")
-            {
-                if(tact > 0.3)
+                if(amp > 0.3)
                 {
-                    tact -= 0.1;
+                    amp -= 0.1;
                 }
             }
-            if (((Button)sender).Name == "BtnTaktPlus")
+            if (((Button)sender).Name == "BtnAmplitudePlus")
             {
-                if (tact < 2.0)
+                if (amp < 2.0)
                 {
-                    tact += 0.1;
+                    amp += 0.1;
                 }
             }
-            txtTact.Text = tact.ToString();
-            Tact = Convert.ToInt32(tact * 1000);
+            txtAmplitude.Text = amp.ToString();
+            settings.Amplitude = Convert.ToInt32(amp * 1000);
         }
 
         private void BtnSRepeat_Click(object sender, RoutedEventArgs e)
@@ -289,10 +205,15 @@ namespace CoordinationTraining
                 }
             }
             txtRepeat.Text = rep.ToString();
-            Repeate = rep;
+            settings.RepeatCount = rep;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+
+        #region Правая менюшка
+
+        private void RightMenu_Click(object sender, RoutedEventArgs e)
         {
             if (GridRightMenu.Width > 0)
             {
@@ -303,62 +224,120 @@ namespace CoordinationTraining
                 BeginStoryboard((Storyboard)this.FindResource("OpenTaskColl"));
             }            
         }
+        
+        private void BtnAddTaskInColl_Click(object sender, RoutedEventArgs e)
+        {
+            //string hand = TbAddTaskInColl_Hand.Text.Replace(" ", "");
+            //string leg = TbAddTaskInColl_Hand.Text.Replace(" ", "");
 
-        /// <summary> Возвращает дефолтный путь к папке с файлами </summary>
-        static string SetDefaultPathFolder()
-        {
-            string _path = Directory.GetCurrentDirectory() + "\\Files";
-            if (!Directory.Exists(_path))
-            {
-                Directory.CreateDirectory(_path);
-            }
-            return _path;
+            //if(hand.Length != 12 && leg.Length != 12)
+            //{
+            //    return;
+            //}
+
+            //g_PlayListColl.Add(new CoordinationTask(hand, leg));
         }
-        /// <summary> Загрузка настроек из файла в settings </summary>
-        bool LoadSettings()
+
+        #endregion
+
+
+
+        #region Вспомогательные функции
+
+        /// <summary> Задаёт в контролы значения из настроек </summary>
+        void GetControlsData(Settings settings)
         {
-            if(!CheckDefaultFolderAndFile())
+            txtAmplitude.Text = (Convert.ToDouble(settings.Amplitude) / 1000).ToString();
+            txtRepeat.Text = settings.RepeatCount.ToString();
+        }
+        
+        /// <summary> Включает/Отключает кнопки при тренеровке </summary>
+        private void isEnable(bool isEnable)
+        {
+            PlayStop.IsEnabled = isEnable;
+        }
+
+        /// <summary> Задаёт цвет конкретного Label на панели (StackPanel) </summary>
+        /// <param name="sp"> Панель - на которой расположены Label'ы </param>
+        /// <param name="numb"> Номер детёныша (Label) в панели </param>
+        /// <param name="color"> Цвет, который нужно задать </param>
+        private void SetLabelColor(StackPanel sp, int numb, SolidColorBrush color)
+        {
+            if (numb < 0)
             {
-                settings = new Settings();
+                return;
             }
-            else
+
+            ((Label)sp.Children[numb]).Foreground = color;
+        }
+        
+        /// <summary> Задаёт цвет всех Label на панели (StackPanel) </summary>
+        /// <param name="sp"> Панель - на которой расположены Label'ы </param>
+        /// <param name="color"> Цвет, который нужно задать </param>
+        private void SetForegroundColor(StackPanel sp, SolidColorBrush color)
+        {
+            Label selLbl;
+
+            for (int i = 0; i < sp.Children.Count; i++)
             {
-                string _settings = File.ReadAllText($"{defaultPathFolder}\\{fileName}");
-                if (_settings.Length != 0)
+                if (sp.Children[i].GetType().Name == "Label")
                 {
-                    settings = JsonConvert.DeserializeObject<Settings>(_settings);
+                    selLbl = (Label)sp.Children[i];
+                    selLbl.Foreground = color;
                 }
-                else
-                {
-                    settings = new Settings();
-                }                
+            }
+        }
+
+        /// <summary> Задает лейблам, находящимся на панелях, контент (R or L) </summary>
+        /// <param name="arBits"> Коллекция с элементами (R or L) </param>
+        void SetLabelOnMainWindow(ObservableCollection<OneBit> arBits)
+        {
+            for (int i = 0; i < BitCount; i++)
+            {
+                ((Label)spHand.Children[i]).Content = arBits[i].hand;
+                ((Label)spLeg.Children[i]).Content = arBits[i].leg;
+            }
+        }
+
+        /// <summary> Возвращает лейблы из панелей в виде коллекции </summary>
+        ObservableCollection<OneBit> GetLabelOnMainWindow()
+        {
+            ObservableCollection<OneBit> coll = new ObservableCollection<OneBit>();
+            for (int i = 0; i < BitCount; i++)
+            {
+                OneBit ob = new OneBit() {
+                    hand = ((Label)spHand.Children[i]).Content.ToString(), 
+                    leg = ((Label)spLeg.Children[i]).Content.ToString()
+                };
+                coll.Add(ob);
             }
 
-            return true;
+            return coll;
         }
-        /// <summary> Сохранение настроек из settings в файла </summary>
-        bool SaveSettings()
+        
+        /// <summary> Задаёт рандомный список битов и заполняет ею панели </summary>
+        private void CreateRandomCoordinationTasks()
         {
-            CheckDefaultFolderAndFile();
-            string json = JsonConvert.SerializeObject(settings);
-            File.WriteAllText($"{defaultPathFolder}\\{fileName}", json);
-            return true;
-        }
-        /// <summary> Проверяет наличие дефолтной папки с файлом настроек,
-        ///  если таковых нет - они будут созданы </summary>
-        bool CheckDefaultFolderAndFile()
-        {
-            bool result = true;
-            if (!Directory.Exists(defaultPathFolder))
+            CoordinationTask t = new CoordinationTask();
+            var rand = new Random();
+            OneBit ob1 = new OneBit() { hand = "L", leg = "R" };
+            OneBit ob2 = new OneBit() { hand = "L", leg = "L" };
+            OneBit ob3 = new OneBit() { hand = "R", leg = "L" };
+            OneBit ob4 = new OneBit() { hand = "R", leg = "R" };
+            ObservableCollection<OneBit> coll = new ObservableCollection<OneBit>();
+            coll.Add(ob1);
+            coll.Add(ob2);
+            coll.Add(ob3);
+            coll.Add(ob4);
+
+            for (int i = 0; i < 12; i++)
             {
-                Directory.CreateDirectory(defaultPathFolder);
+                t.AddInOneBitColl(coll[rand.Next(coll.Count)]);
             }
-            if (!File.Exists($"{defaultPathFolder}\\{fileName}"))
-            {
-                File.Create($"{defaultPathFolder}\\{fileName}");
-                result = false;
-            }
-            return result;
+            SetLabelOnMainWindow(t.GetOneBitColl());
         }
+
+        #endregion
+
     }
 }

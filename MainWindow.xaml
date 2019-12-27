@@ -110,6 +110,8 @@
         </Style>
 
         <Style TargetType="{x:Type Button}" x:Key="BtnManageBarPlus">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate  TargetType="Button">
@@ -165,7 +167,121 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnRandom">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="25" Height="25" RenderTransformOrigin=".5,.5">
+                            
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"/>
+                            <Grid Background="#2D2D30" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,6,0,0"/>
+                            <Polygon x:Name="border2" Fill="#2196F3" Points="0, 0, 6, 6, 12, 0" Margin="1,0,0,0">
+                                <Polygon.RenderTransform>
+                                    <RotateTransform Angle="40"></RotateTransform>
+                                </Polygon.RenderTransform>
+                            </Polygon>
+                                                        
+                            <Grid.RenderTransform>
+                                <RotateTransform x:Name="AnimatedRotateTransform" Angle="0"/>
+                            </Grid.RenderTransform>
+                            
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseDown">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
+                                                             Storyboard.TargetProperty="Angle" 
+                                                             By="10" To="-360" Duration="0:0:0.5" 
+                                                             FillBehavior="Stop"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
+                        </Grid>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Stroke" TargetName="border2" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                                <Setter Property="Stroke" TargetName="border2" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                                <Setter Property="Stroke" TargetName="border2" Value="Brown"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnPlay">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="30" Height="30" RenderTransformOrigin=".5,.5">
+
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"/>
+                            <Polygon x:Name="border2" Fill="#2196F3" Points="0, 0, 0, 14, 12, 7" 
+                                     VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3,0,0,0"/>
+
+
+                            <!--<Grid.RenderTransform>
+                                <RotateTransform x:Name="AnimatedRotateTransform" Angle="0"/>
+                            </Grid.RenderTransform>
+
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseDown">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
+                                                             Storyboard.TargetProperty="Angle" 
+                                                             By="10" To="-360" Duration="0:0:0.5" 
+                                                             FillBehavior="Stop"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>-->
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Stroke" TargetName="border2" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                                <Setter Property="Fill" TargetName="border2" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                                <Setter Property="Fill" TargetName="border2" Value="Brown"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style TargetType="{x:Type Label}" x:Key="BarMenuLbl">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -176,7 +292,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="140"/>
+            <Setter Property="FontSize" Value="120"/>
         </Style>
         
     </Window.Resources>
@@ -224,14 +340,13 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0">
 
-                    <Button x:Name="BtnTaktMinus" Width="25" Height="25" Style="{StaticResource BtnManageBarMinus}"
-                            Click="BtnSTakt_Click"/>
+                    <Button x:Name="BtnAmplitudeMinus" Width="25" Height="25" Style="{StaticResource BtnManageBarMinus}"
+                            Click="BtnSAmplitude_Click"/>
 
-                    <TextBox x:Name="txtTact" Width="40" MaxLength="3" VerticalAlignment="Center" Text="1,0"
+                    <TextBox x:Name="txtAmplitude" Width="40" MaxLength="3" VerticalAlignment="Center" Text="1,0"
                              Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" ToolTip="Такт ( Частота ) "/>
 
-                    <Button x:Name="BtnTaktPlus" Width="25" Height="25" Style="{StaticResource BtnManageBarPlus}"
-                            Click="BtnSTakt_Click"/>
+                    <Button x:Name="BtnAmplitudePlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnSAmplitude_Click"/>
 
                     <Grid Width="50"/>
                     
@@ -241,27 +356,25 @@
                     <TextBox x:Name="txtRepeat" Width="25" MaxLength="1" VerticalAlignment="Center" Text="2" 
                              Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" Margin="5,0" />
 
-                    <Button x:Name="BtnRepeatPlus" Width="25" Height="25" Style="{StaticResource BtnManageBarPlus}"
-                            Click="BtnSRepeat_Click"/>
+                    <Button x:Name="BtnRepeatPlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnSRepeat_Click"/>
                     
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-                    <Button x:Name="PlayStop" Click="PlayStop_Click" Background="Transparent" BorderBrush="Transparent" Margin="0,0,50,0">
-                        <Image Source="Resources\play.png"/>
-                    </Button>
-                    
-                    <Button x:Name="BtnRandom" Click="BtnRandom_Click" Background="Transparent" BorderBrush="Transparent">
-                        <Image Source="Resources\refresh.png"/>
-                    </Button>
+                    <Button x:Name="PlayStop" Click="PlayStop_Click" Style="{StaticResource BtnPlay}" Margin="0,0,50,0" ToolTip="Начать тренировку"/>
+
+                    <Button x:Name="BtnRandom" Click="BtnRandom_Click" Style="{StaticResource BtnRandom}" Margin="5,0" ToolTip="Обновить тренировку"/>
+
+                    <Button x:Name="BtnAddToColl" Click="BtnAddToColl_Click" Style="{StaticResource BtnManageBarPlus}" Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
+
 
                 </StackPanel>
 
                 <Grid HorizontalAlignment="Right" Width="270">
 
                     <Button x:Name="BtnRightMenu" HorizontalAlignment="Right" 
-                            Width="35" Height="35" Margin="0, 0, 10, 0" Click="Button_Click" 
+                            Width="35" Height="35" Margin="0, 0, 10, 0" Click="RightMenu_Click" 
                             Style="{StaticResource BtnManageRightMenu}"/>
 
                 </Grid>
@@ -277,25 +390,25 @@
                 <Grid Grid.Row="0" x:Name="GridHand" Width="1230">
 
                     <Label Content="Р:" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                           Style="{StaticResource MainLbl}" FontSize="60" Margin="0,0,0,50"/>
+                           Style="{StaticResource MainLbl}" FontSize="60" Margin="0,0,0,30"/>
 
                     <StackPanel x:Name="spHand" Orientation="Horizontal" VerticalAlignment="Bottom" 
                                 HorizontalAlignment="Left" Margin="100,0,0,0">
                         
-                        <Label x:Name="H1" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H2" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H3" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H4" Content="L" Style="{StaticResource MainLbl}" Margin="0,0,100,0"/>
+                        <Label x:Name="H1" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H2" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H3" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H4" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
 
-                        <Label x:Name="H5" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H6" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H7" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H8" Content="L" Style="{StaticResource MainLbl}" Margin="0,0,100,0"/>
+                        <Label x:Name="H5" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H6" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H7" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H8" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
 
-                        <Label x:Name="H9" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H10" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H11" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="H12" Content="L" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H9" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H10" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H11" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="H12" Content="R" Style="{StaticResource MainLbl}"/>
                                                 
                     </StackPanel>
                 </Grid>
@@ -303,25 +416,25 @@
                 <Grid Grid.Row="1" x:Name="GridLeg" Width="1230">
                     
                     <Label Content="Н:" VerticalAlignment="Top" HorizontalAlignment="Left" 
-                           Style="{StaticResource MainLbl}" FontSize="60" Margin="0, 50, 0, 0"/>
+                           Style="{StaticResource MainLbl}" FontSize="60" Margin="0, 40, 0, 0"/>
 
                     <StackPanel x:Name="spLeg" Orientation="Horizontal" VerticalAlignment="Top"
                                 HorizontalAlignment="Left" Margin="100,0,0,0">
 
-                        <Label x:Name="L1" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L2" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L3" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L4" Content="L" Style="{StaticResource MainLbl}" Margin="0,0,100,0"/>
+                        <Label x:Name="L1" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L2" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L3" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L4" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
 
-                        <Label x:Name="L5" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L6" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L7" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L8" Content="L" Style="{StaticResource MainLbl}" Margin="0,0,100,0"/>
+                        <Label x:Name="L5" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L6" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L7" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L8" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
 
-                        <Label x:Name="L9" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L10" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L11" Content="L" Style="{StaticResource MainLbl}"/>
-                        <Label x:Name="L12" Content="L" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L9" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L10" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L11" Content="R" Style="{StaticResource MainLbl}"/>
+                        <Label x:Name="L12" Content="R" Style="{StaticResource MainLbl}"/>
 
                     </StackPanel>
                 </Grid>
