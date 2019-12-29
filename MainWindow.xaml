@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:CoordinationTraining"
         mc:Ignorable="d"
         Closed="Window_Closed"
@@ -29,7 +30,18 @@
                              Storyboard.TargetName="GridLeg" Duration="0:0:0.3" To="1230" />
         </Storyboard>
 
-
+        <Style TargetType="{x:Type TextBlock}" x:Key="tbSettingsMenu">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        
+        
         <Style TargetType="{x:Type TextBox}" x:Key="TbMinimalBase" >
             <Setter Property="BorderBrush" Value="#67676B"/>
             <Setter Property="Foreground" Value="White"/>
@@ -361,12 +373,21 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    
+                    <Button x:Name="PlayMetronom" Style="{StaticResource BtnPlay}" 
+                            Margin="5,0" ToolTip="Тренироваться по своему листу"/>
+                    
+                    <Button x:Name="PlayTrainingList" Style="{StaticResource BtnPlay}" 
+                            Margin="5,0,50,0" ToolTip="Тренироваться по своему листу"/>
 
-                    <Button x:Name="PlayStop" Click="PlayStop_Click" Style="{StaticResource BtnPlay}" Margin="0,0,50,0" ToolTip="Начать тренировку"/>
+                    <Button x:Name="PlayStop" Click="PlayStop_Click" Style="{StaticResource BtnPlay}" 
+                            Margin="0,0,50,0" ToolTip="Начать тренировку"/>
 
-                    <Button x:Name="BtnRandom" Click="BtnRandom_Click" Style="{StaticResource BtnRandom}" Margin="5,0" ToolTip="Обновить тренировку"/>
+                    <Button x:Name="BtnRandom" Click="BtnRandom_Click" Style="{StaticResource BtnRandom}" 
+                            Margin="5,0" ToolTip="Обновить тренировку"/>
 
-                    <Button x:Name="BtnAddToColl" Click="BtnAddToColl_Click" Style="{StaticResource BtnManageBarPlus}" Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
+                    <Button x:Name="BtnAddToColl" Click="BtnAddToColl_Click" Style="{StaticResource BtnManageBarPlus}" 
+                            Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
 
 
                 </StackPanel>
@@ -388,6 +409,9 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" x:Name="GridHand" Width="1230">
+
+                    <Label x:Name="lblTactCount" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                           Style="{StaticResource MainLbl}" FontSize="80" Margin="0,0,0,30" Foreground="#2196F3"/>
 
                     <Label Content="Р:" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
                            Style="{StaticResource MainLbl}" FontSize="60" Margin="0,0,0,30"/>
@@ -455,7 +479,30 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        
+                        <StackPanel Orientation="Vertical">
+                            <Grid Height="50">
+                                <TextBlock Text="Использовать метроном в начале тренировки"
+                                           Style="{StaticResource tbSettingsMenu}"/>
+                                <CheckBox x:Name="cbMetronom"  Margin="220,0,0,0"
+                                          VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                            </Grid>
+
+                            <Grid Background="#2196F3" Height="1"/>
+
+                            <Grid Height="50">
+                                <TextBlock Text="Подсветка текста при тренеровке"
+                                           Style="{StaticResource tbSettingsMenu}"/>
+                                <xctk:ColorPicker Name="cpIllumination" Width="40" Height="20"
+                                                  HorizontalAlignment="Left" Margin="210,0,0,0"
+                                                  SelectedColorChanged="cpIllumination_SelectedColorChanged"/>
+
+                            </Grid>
+
+                            <Grid Background="#2196F3" Height="1"/>
+                            
+                            
+                        </StackPanel>
                     </Grid>
 
                     <Grid Grid.Row="2" Background="#2196F3">

@@ -74,6 +74,8 @@ namespace CoordinationTraining
 
 
         private readonly int BitCount = 12;
+        /// <summary> Количество тактов в одном промежутке </summary>
+        private readonly int TactCount = 4;
 
         /// <summary> Звук метронома - используется в тренеровке </summary>
         private SoundPlayer MetronomeSound;
@@ -105,13 +107,19 @@ namespace CoordinationTraining
         private void Start()
         {
             int i = 0;
+            int tc = 0;
 
-            for(int k = 0; k < settings.RepeatCount * BitCount; k++)
+            MetronomStart(TactCount);
+
+            for (int k = 0; k < settings.RepeatCount * BitCount; k++)
             {
+                tc++;
                 Thread.Sleep(settings.Amplitude);
                 MetronomeSound.Play();
                 Dispatcher.Invoke(() =>
                 {
+                    lblTactCount.Content = tc.ToString();
+
                     SetLabelColor(spHand, i, Brushes.Green);
                     SetLabelColor(spLeg, i, Brushes.Green);
                     if (i == 0)
@@ -127,14 +135,19 @@ namespace CoordinationTraining
                 });
 
                 i++;
-
+                if (tc == TactCount)
+                {
+                    tc = 0;
+                }
                 if (i == BitCount)
                 {
                     i = 0;
                 }
             }
-            Dispatcher.Invoke(() => 
-            { 
+            Dispatcher.Invoke(() =>
+            {
+                lblTactCount.Content = "";
+
                 isEnable(true);
                 SetLabelColor(spHand, spHand.Children.Count - 1, Brushes.White);
                 SetLabelColor(spLeg, spLeg.Children.Count - 1, Brushes.White);
@@ -162,7 +175,23 @@ namespace CoordinationTraining
         {
             g_PlayListColl.Add(new CoordinationTask(GetLabelOnMainWindow()));
         }
+
+        /// <summary> Проигрывает метроном с выстановленной амплитудой </summary>
+        private void MetronomStart(int _bitCount)
+        {
+            for (int k = 0; k < _bitCount; k++)
+            {
+                Thread.Sleep(settings.Amplitude);
+                MetronomeSound.Play();
+                Dispatcher.Invoke(() =>
+                {
+                    lblTactCount.Content = (k + 1).ToString();
+                });
+            }
+        }
+
         #endregion
+
 
         #region Левая менюшка с Амплитудой и Повторами
 
@@ -171,7 +200,7 @@ namespace CoordinationTraining
             double amp = Convert.ToDouble(txtAmplitude.Text );
             if (((Button)sender).Name == "BtnAmplitudeMinus")
             {
-                if(amp > 0.3)
+                if(amp > 0.4)
                 {
                     amp -= 0.1;
                 }
@@ -237,9 +266,12 @@ namespace CoordinationTraining
 
             //g_PlayListColl.Add(new CoordinationTask(hand, leg));
         }
-
+        
+        private void cpIllumination_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            settings.colorIllumination = new SolidColorBrush(cpIllumination.SelectedColor.Value);
+        }
         #endregion
-
 
 
         #region Вспомогательные функции
@@ -249,6 +281,7 @@ namespace CoordinationTraining
         {
             txtAmplitude.Text = (Convert.ToDouble(settings.Amplitude) / 1000).ToString();
             txtRepeat.Text = settings.RepeatCount.ToString();
+            cpIllumination.Background = settings.colorIllumination;
         }
         
         /// <summary> Включает/Отключает кнопки при тренеровке </summary>

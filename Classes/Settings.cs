@@ -30,6 +30,9 @@ namespace CoordinationTraining.Classes
         /// <summary> Количество повторов выполняемого задания </summary>
         public int Amplitude { get; set; }
 
+        /// <summary> Использовать метроном </summary>
+        public bool UseMetronom { get; set; }
+
         public Settings()
         {
             //pathToTreningCollFile = MainWindow.SetDefaultPathFolder();
