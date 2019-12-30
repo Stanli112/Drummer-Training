@@ -26,16 +26,41 @@ using System.Runtime.CompilerServices;
 namespace CoordinationTraining
 {
     /// <summary>
-    /// Придумать файл настроек
-    /// Больше констант
+    /// Добавить запуск только плейлиста
     /// Добавить скрытие, развёртывание окна и ресайз
-    /// Такт и кол-во повторов нужно добавить загрузгойиз файла настроек
     /// Нормальное дабовление записей + возможность добавлять текущие записи 
-    /// И отдельный json в загрузку записей
     /// </summary>
     public partial class MainWindow : Window
     {
         #region Title
+        /// <summary> Свернуть окно </summary>
+        private void BtnWindowWrap_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        
+        /// <summary> Меняет размеры окна из 'На весь экран' на поиеньше, при захвате мышкой </summary>
+        private void TitleBarMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.BeginInit();
+                    double adjustment = 40.0;
+                    var mouse1 = e.MouseDevice.GetPosition(this);
+                    var width1 = Math.Max(this.ActualWidth - 2 * adjustment, adjustment);
+                    this.WindowState = WindowState.Normal;
+                    var width2 = Math.Max(this.ActualWidth - 2 * adjustment, adjustment);
+                    this.Left = (mouse1.X - adjustment) * (1 - width2 / width1);
+                    this.Top = -7;
+                    this.EndInit();
+                    this.DragMove();
+                }
+            }
+        }
+
+        /// <summary> Развернуть окно </summary>
         private void BtnWindowExtend_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState == WindowState.Normal)
@@ -43,6 +68,8 @@ namespace CoordinationTraining
             else
                 this.WindowState = WindowState.Normal;
         }
+        
+        /// <summary> Таскать окно </summary>
         private void WindowMove(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount > 1)
@@ -54,11 +81,14 @@ namespace CoordinationTraining
                 this.DragMove();
             }
         }
+               
+        /// <summary> Закрыть окно </summary>
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary> Перед закрытием окна </summary>
         private void Window_Closed(object sender, EventArgs e)
         {
             settings.SaveSettings();
@@ -72,9 +102,12 @@ namespace CoordinationTraining
             RIGHT
         }
 
+        /// <summary> Для запуска/остановки метронома </summary>
+        bool MetronomUsed = false;
+
 
         private readonly int BitCount = 12;
-        /// <summary> Количество тактов в одном промежутке </summary>
+        /// <summary> Количество тактов в одном промежутке (4) </summary>
         private readonly int TactCount = 4;
 
         /// <summary> Звук метронома - используется в тренеровке </summary>
@@ -97,7 +130,9 @@ namespace CoordinationTraining
             MetronomeSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             MetronomeSound.Load();
 
+
             LbTaskColl.ItemsSource = g_PlayListColl;
+            GetFirstItemInMaOnWindow();
         }
 
 
@@ -109,7 +144,10 @@ namespace CoordinationTraining
             int i = 0;
             int tc = 0;
 
-            MetronomStart(TactCount);
+            if (settings.UseMetronom)
+            {
+                MetronomStart(TactCount);
+            }            
 
             for (int k = 0; k < settings.RepeatCount * BitCount; k++)
             {
@@ -120,8 +158,8 @@ namespace CoordinationTraining
                 {
                     lblTactCount.Content = tc.ToString();
 
-                    SetLabelColor(spHand, i, Brushes.Green);
-                    SetLabelColor(spLeg, i, Brushes.Green);
+                    SetLabelColor(spHand, i, settings.colorIllumination);
+                    SetLabelColor(spLeg, i, settings.colorIllumination);
                     if (i == 0)
                     {
                         SetLabelColor(spHand, spHand.Children.Count - 1, Brushes.White);
@@ -176,18 +214,21 @@ namespace CoordinationTraining
             g_PlayListColl.Add(new CoordinationTask(GetLabelOnMainWindow()));
         }
 
-        /// <summary> Проигрывает метроном с выстановленной амплитудой </summary>
-        private void MetronomStart(int _bitCount)
+        /// <summary> Запускает и останавливает метроном </summary>
+        private void PlayMetronom_Click(object sender, RoutedEventArgs e)
         {
-            for (int k = 0; k < _bitCount; k++)
+            MetronomUsed = !MetronomUsed;
+            Task t = Task.Run(() => 
             {
-                Thread.Sleep(settings.Amplitude);
-                MetronomeSound.Play();
-                Dispatcher.Invoke(() =>
+                while (MetronomUsed)
                 {
-                    lblTactCount.Content = (k + 1).ToString();
-                });
-            }
+                    MetronomStart(TactCount);
+                    if (!MetronomUsed)
+                    {
+                        Dispatcher.Invoke(() => { lblTactCount.Content = ""; });
+                    }
+                }
+            });            
         }
 
         #endregion
@@ -271,10 +312,44 @@ namespace CoordinationTraining
         {
             settings.colorIllumination = new SolidColorBrush(cpIllumination.SelectedColor.Value);
         }
+
+        private void cbMetronom_Click(object sender, RoutedEventArgs e)
+        {
+            settings.UseMetronom = (bool)cbMetronom.IsChecked;
+        }
+
         #endregion
 
 
         #region Вспомогательные функции
+
+        /// <summary> Проигрывает метроном с выстановленной амплитудой </summary>
+        private void MetronomStart(int _bitCount)
+        {
+            for (int k = 0; k < _bitCount; k++)
+            {
+                Thread.Sleep(settings.Amplitude);
+                MetronomeSound.Play();
+                Dispatcher.Invoke(() =>
+                {
+                    lblTactCount.Content = (k + 1).ToString();
+                });
+            }
+        }
+
+        /// <summary> Задаёт первую запись из коллекции </summary>
+        void GetFirstItemInMaOnWindow()
+        {
+            if (g_PlayListColl.Count != 0)
+            {
+                CoordinationTask ct = g_PlayListColl[0];
+                for (int i = 0; i < BitCount; i++)
+                {
+                    ((Label)spHand.Children[i]).Content = ct.AllHand[i];
+                    ((Label)spLeg.Children[i]).Content = ct.AllLeg[i];
+                }
+            }
+        }
 
         /// <summary> Задаёт в контролы значения из настроек </summary>
         void GetControlsData(Settings settings)
@@ -282,12 +357,14 @@ namespace CoordinationTraining
             txtAmplitude.Text = (Convert.ToDouble(settings.Amplitude) / 1000).ToString();
             txtRepeat.Text = settings.RepeatCount.ToString();
             cpIllumination.Background = settings.colorIllumination;
+            cbMetronom.IsChecked = settings.UseMetronom;
         }
         
         /// <summary> Включает/Отключает кнопки при тренеровке </summary>
         private void isEnable(bool isEnable)
         {
             PlayStop.IsEnabled = isEnable;
+            BtnRepeatMinus.IsEnabled = isEnable;
         }
 
         /// <summary> Задаёт цвет конкретного Label на панели (StackPanel) </summary>

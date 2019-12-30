@@ -60,33 +60,30 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
         
-        <Style TargetType="{x:Type Button}" x:Key="BarMenu">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="20"/>
+        <Style TargetType="{x:Type Button}" x:Key="BtnTitle">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2D2D30" StrokeThickness="1"/>
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="15" Height="15">
+                                <Polygon Stroke="Orange" Points="3,3,  13,13" StrokeThickness="1.5"/>
+                            </Grid>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="Transparent"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#4B4B50"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="Transparent"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -293,6 +290,84 @@
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type Button}" x:Key="BtnPlayMetronom">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="30" Height="30">
+
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"/>
+
+                            <Polygon Fill="Orange" Points="0, 0, 0, 10, 7, 5" 
+                                     VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+                            
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="20" Height="20">
+                                <Polyline Stroke="Orange" Points="4,19,  4,4,  10,12,  16,4,  16,19" StrokeThickness="2"/>
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnPlayGlobalList">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="30" Height="30">
+
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"/>
+
+                            <Polygon Fill="Orange" Points="0, 0, 0, 10, 7, 5" 
+                                     VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="16" Height="20">
+                                <Polyline Stroke="Orange" Points="4,1,  4,18,  14,18" StrokeThickness="2"/>
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
 
         <Style TargetType="{x:Type Label}" x:Key="BarMenuLbl">
             <Setter Property="Foreground" Value="White"/>
@@ -329,7 +404,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#1E1E1E" MouseLeftButtonDown="WindowMove">
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#1E1E1E" MouseLeftButtonDown="WindowMove" MouseMove="TitleBarMouseMove">
                 <Rectangle Height="5"  VerticalAlignment="Top" Fill="#2196F3"/>
                 <Polygon Fill="#2196F3" Points="70,0 250,0 250,30 100,30"  HorizontalAlignment="Right" />
 
@@ -337,7 +412,16 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 15, 3">
 
-                    <Button Style="{StaticResource BarMenu}" Height="15" Width="15" Click="CloseWindow">
+                    <Button Name="btnWindowWrap" Width="20" Click="BtnWindowWrap_Click">
+                        <Grid Margin="0,10,0,0">
+                            <Line Y1="0" X2="1" Stroke="White" Stretch="Fill" StrokeThickness="1.3"/>
+                        </Grid>
+                    </Button>
+                    
+                    <Button Name="btnWindowExtend" 
+                            Width="30" Padding="5" Click="BtnWindowExtend_Click"/>
+
+                    <Button Style="{StaticResource BtnTitle}" Height="20" Width="20" Click="CloseWindow">
                         <Grid>
                             <Line X1="0" Y1="0" X2="15" Y2="15" Stroke="Black" StrokeThickness="1.5"/>
                             <Line X1="0" Y1="13" X2="13" Y2="0" Stroke="Black" StrokeThickness="1.5"/>
@@ -373,12 +457,12 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    
-                    <Button x:Name="PlayMetronom" Style="{StaticResource BtnPlay}" 
-                            Margin="5,0" ToolTip="Тренироваться по своему листу"/>
-                    
-                    <Button x:Name="PlayTrainingList" Style="{StaticResource BtnPlay}" 
-                            Margin="5,0,50,0" ToolTip="Тренироваться по своему листу"/>
+
+                    <Button x:Name="PlayMetronom" Style="{StaticResource BtnPlayMetronom}" 
+                            Margin="5,0" ToolTip="Запустить/Отключить метроном" Click="PlayMetronom_Click"/>
+
+                    <Button x:Name="PlayTrainingList" Style="{StaticResource BtnPlayGlobalList}" 
+                            Margin="5,0,50,0" ToolTip="Запустить/Отключить своей лист"/>
 
                     <Button x:Name="PlayStop" Click="PlayStop_Click" Style="{StaticResource BtnPlay}" 
                             Margin="0,0,50,0" ToolTip="Начать тренировку"/>
@@ -484,8 +568,8 @@
                                 <TextBlock Text="Использовать метроном в начале тренировки"
                                            Style="{StaticResource tbSettingsMenu}"/>
                                 <CheckBox x:Name="cbMetronom"  Margin="220,0,0,0"
-                                          VerticalAlignment="Center" HorizontalAlignment="Left"/>
-
+                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                          Click="cbMetronom_Click"/>
                             </Grid>
 
                             <Grid Background="#2196F3" Height="1"/>
