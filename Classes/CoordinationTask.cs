@@ -13,10 +13,18 @@ namespace CoordinationTraining.Classes
         public CoordinationTask(ObservableCollection<OneBit> arBits)
         {
             this.arBits = arBits;
+            int i = 0;
             foreach(OneBit ob in arBits)
             {
+                i++;
                 allHand += ob.hand;
                 allLeg += ob.leg;
+                if(i == 4)
+                {
+                    allHand += " ";
+                    allLeg += " ";
+                    i = 0;
+                }
             }
         }
         public CoordinationTask(string strHand, string strLeg)
@@ -46,9 +54,16 @@ namespace CoordinationTraining.Classes
 
         public void SetArray()
         {
+            string _allHand = this.AllHand.ToString().Replace(" ", "");
+            string _allLeg = this.AllLeg.ToString().Replace(" ", "");
+
             for (int i = 0; i < BitCount; i++)
             {
-                OneBit ob = new OneBit() { hand = this.AllHand[i].ToString(), leg = this.AllLeg[i].ToString() };
+                OneBit ob = new OneBit() 
+                { 
+                    hand = _allHand[i].ToString(), 
+                    leg = _allLeg[i].ToString()
+                };
                 this.arBits.Add(ob);
             }
         }

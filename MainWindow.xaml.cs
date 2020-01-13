@@ -25,11 +25,6 @@ using System.Runtime.CompilerServices;
 
 namespace CoordinationTraining
 {
-    /// <summary>
-    /// Добавить запуск только плейлиста
-    /// Добавить скрытие, развёртывание окна и ресайз
-    /// Нормальное дабовление записей + возможность добавлять текущие записи 
-    /// </summary>
     public partial class MainWindow : Window
     {
         #region Title
@@ -96,12 +91,6 @@ namespace CoordinationTraining
         }
         #endregion
 
-        enum BitChoice
-        {
-            LEFT,
-            RIGHT
-        }
-
         /// <summary> Для запуска/остановки метронома </summary>
         bool MetronomUsed = false;
 
@@ -114,6 +103,8 @@ namespace CoordinationTraining
         private SoundPlayer MetronomeSound;
         /// <summary> Хранит настройки проекта </summary>        
         private Settings settings = new Settings();
+        /// <summary> Выбранное в списке задание </summary>        
+        private CoordinationTask selCT = new CoordinationTask();
 
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
 
@@ -295,19 +286,6 @@ namespace CoordinationTraining
             }            
         }
         
-        private void BtnAddTaskInColl_Click(object sender, RoutedEventArgs e)
-        {
-            //string hand = TbAddTaskInColl_Hand.Text.Replace(" ", "");
-            //string leg = TbAddTaskInColl_Hand.Text.Replace(" ", "");
-
-            //if(hand.Length != 12 && leg.Length != 12)
-            //{
-            //    return;
-            //}
-
-            //g_PlayListColl.Add(new CoordinationTask(hand, leg));
-        }
-        
         private void cpIllumination_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             settings.colorIllumination = new SolidColorBrush(cpIllumination.SelectedColor.Value);
@@ -317,7 +295,26 @@ namespace CoordinationTraining
         {
             settings.UseMetronom = (bool)cbMetronom.IsChecked;
         }
+        
+        private void BtnRemoveTaskFromColl_Click(object sender, RoutedEventArgs e)
+        {
+            selCT = (CoordinationTask)((sender as Button).Parent as Grid).DataContext;
+            g_PlayListColl.Remove(selCT);
 
+            if(LbTaskColl.Items.Count != 0)
+            {
+                LbTaskColl.SelectedItem = LbTaskColl.Items[0];
+            }            
+        }
+
+        private void LbTaskColl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selCT = (CoordinationTask)LbTaskColl.SelectedItem;
+            if(selCT != null)
+            {
+                SetLabelOnMainWindow(selCT.GetOneBitColl());
+            }            
+        }
         #endregion
 
 
@@ -345,8 +342,8 @@ namespace CoordinationTraining
                 CoordinationTask ct = g_PlayListColl[0];
                 for (int i = 0; i < BitCount; i++)
                 {
-                    ((Label)spHand.Children[i]).Content = ct.AllHand[i];
-                    ((Label)spLeg.Children[i]).Content = ct.AllLeg[i];
+                    ((Label)spHand.Children[i]).Content = ct.AllHand.Replace(" ", "")[i];
+                    ((Label)spLeg.Children[i]).Content = ct.AllLeg.Replace(" ", "")[i];
                 }
             }
         }
@@ -365,6 +362,7 @@ namespace CoordinationTraining
         {
             PlayStop.IsEnabled = isEnable;
             BtnRepeatMinus.IsEnabled = isEnable;
+            PlayMetronom.IsEnabled = isEnable;
         }
 
         /// <summary> Задаёт цвет конкретного Label на панели (StackPanel) </summary>

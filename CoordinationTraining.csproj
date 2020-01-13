@@ -119,10 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\cut.wav" />
-    <Resource Include="Resources\minus.png" />
-    <Resource Include="Resources\plus.png" />
-    <Resource Include="Resources\play.png" />
-    <Resource Include="Resources\refresh.png" />
+    <Resource Include="Resources\remove.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
