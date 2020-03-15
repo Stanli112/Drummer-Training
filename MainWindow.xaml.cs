@@ -27,6 +27,8 @@ namespace CoordinationTraining
 {
     public partial class MainWindow : Window
     {
+        const string lblMainBeat = "Beat creator";
+        const string lblMainCoor = "Coordination training";
         #region Title
         /// <summary> Свернуть окно </summary>
         private void BtnWindowWrap_Click(object sender, RoutedEventArgs e)
@@ -91,6 +93,12 @@ namespace CoordinationTraining
         }
         #endregion
 
+        enum _page
+        {
+            beat,
+            coord
+        }
+
         /// <summary> Для запуска/остановки метронома </summary>
         bool MetronomUsed = false;
 
@@ -112,7 +120,10 @@ namespace CoordinationTraining
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            btnMainBeatCreator.Content = lblMainBeat;
+            btnMainCoordTraining.Content = lblMainCoor;
+
             settings.LoadSettings(ref settings);
             settings.LoadTrainingColl(ref g_PlayListColl);
 
@@ -124,9 +135,11 @@ namespace CoordinationTraining
 
             LbTaskColl.ItemsSource = g_PlayListColl;
             GetFirstItemInMaOnWindow();
+
+            ShowPage(_page.beat);
         }
 
-
+        #region Coordination Training
 
         #region Центральная панель
 
@@ -447,5 +460,55 @@ namespace CoordinationTraining
 
         #endregion
 
+        #endregion
+
+        #region Global func
+
+        private void ShowPage(_page page)
+        {
+            switch(page)
+            {
+                case _page.beat:
+                    {
+                        GridBarBeatCreator.Visibility = Visibility.Visible;
+                        GridMainBeatCreator.Visibility = Visibility.Visible;
+
+                        GridBarCoordTrening.Visibility = Visibility.Hidden;
+                        GridMainCoordTreaning.Visibility = Visibility.Hidden;
+                        break;
+                    }
+
+                case _page.coord:
+                    {
+                        GridBarBeatCreator.Visibility = Visibility.Hidden;
+                        GridMainBeatCreator.Visibility = Visibility.Hidden;
+
+                        GridBarCoordTrening.Visibility = Visibility.Visible;
+                        GridMainCoordTreaning.Visibility = Visibility.Visible;
+
+                        break;
+                    }
+            }
+        }
+
+        private void btnMain_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            switch(btn.Content)
+            {
+                case lblMainBeat:
+                    ShowPage(_page.beat);
+                    break;
+
+                case lblMainCoor:
+                    ShowPage(_page.coord);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        
+        #endregion
     }
 }
