@@ -89,6 +89,7 @@
     <Compile Include="Classes\CoordinationTask.cs" />
     <Compile Include="Classes\OneBit.cs" />
     <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Controls\Casses\Tact.cs" />
     <Compile Include="Controls\Rhythm.xaml.cs">
       <DependentUpon>Rhythm.xaml</DependentUpon>
     </Compile>

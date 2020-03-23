@@ -38,7 +38,7 @@
             <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="#6E5EC7" Margin="45, 0"/>
 
             <!-- Floor-Tom -->
-            <Grid x:Name="FloorTomDrum_0" Grid.Column="0" Grid.Row="1" Grid.RowSpan="6">
+            <Grid x:Name="FloorTomDrum_0" Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -55,7 +55,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="FloorTomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="6">
+            <Grid x:Name="FloorTomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="6" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -72,7 +72,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="FloorTomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="6">
+            <Grid x:Name="FloorTomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="6" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -89,7 +89,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="FloorTomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="6">
+            <Grid x:Name="FloorTomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="6" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -123,7 +123,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="RotoTomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
+            <Grid x:Name="RotoTomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -139,7 +139,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="RotoTomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="5">
+            <Grid x:Name="RotoTomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -155,7 +155,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="RotoTomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5">
+            <Grid x:Name="RotoTomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -187,7 +187,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="TomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4">
+            <Grid x:Name="TomDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -202,7 +202,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="TomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4">
+            <Grid x:Name="TomDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -217,7 +217,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="TomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4">
+            <Grid x:Name="TomDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -247,7 +247,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="SnareDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <Grid x:Name="SnareDrum_1" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -261,7 +261,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="SnareDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
+            <Grid x:Name="SnareDrum_2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -275,7 +275,7 @@
                 </Ellipse>
             </Grid>
 
-            <Grid x:Name="SnareDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="3">
+            <Grid x:Name="SnareDrum_3" Grid.Column="3" Grid.Row="1" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -290,7 +290,7 @@
             </Grid>
             
             <!-- Hi-Hat -->
-            <Grid x:Name="HiHat_0" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3"  Visibility="Hidden">
+            <Grid x:Name="HiHat_0" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -304,7 +304,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="HiHat_1" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" >
+            <Grid x:Name="HiHat_1" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -318,7 +318,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="HiHat_2" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" >
+            <Grid x:Name="HiHat_2" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -332,7 +332,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="HiHat_3" Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
+            <Grid x:Name="HiHat_3" Grid.Row="1" Grid.Column="3" Grid.RowSpan="3"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -346,15 +346,28 @@
                 </Grid>
             </Grid>
 
-
-            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Background="Transparent">
+            
+            <!-- Events -->
+            <Grid x:Name="Menu_0" Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Background="Transparent">
                 <Grid.ContextMenu>
                     <ContextMenu StaysOpen="True">
-                        <MenuItem Header="Hi-Hat" IsCheckable="True" Click="HiHat_Click"/>
-                        <MenuItem Header="Snare" IsCheckable="True" Click="Snare_Click"/>
-                        <MenuItem Header="Tom" IsCheckable="True" Click="Tom_Click"/>
-                        <MenuItem Header="Roto-Tom" IsCheckable="True" Click="RotoTom_Click"/>
-                        <MenuItem Header="Floor-Tom" IsCheckable="True" Click="FloorTom_Click"/>
+                        <MenuItem Header="Hi-Hat" IsCheckable="True" StaysOpenOnClick="True"  Click="HiHat_Click"/>
+                        <MenuItem Header="Snare" IsCheckable="True" StaysOpenOnClick="True"  Click="Snare_Click"/>
+                        <MenuItem Header="Tom" IsCheckable="True" StaysOpenOnClick="True"  Click="Tom_Click"/>
+                        <MenuItem Header="Roto-Tom" IsCheckable="True" StaysOpenOnClick="True"  Click="RotoTom_Click"/>
+                        <MenuItem Header="Floor-Tom" IsCheckable="True" StaysOpenOnClick="True" Click="FloorTom_Click"/>
+                    </ContextMenu>
+                </Grid.ContextMenu>
+            </Grid>
+
+            <Grid x:Name="Menu_1" Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Background="Transparent">
+                <Grid.ContextMenu>
+                    <ContextMenu StaysOpen="True">
+                        <MenuItem Header="Hi-Hat" IsCheckable="True" StaysOpenOnClick="True"  Click="HiHat_Click"/>
+                        <MenuItem Header="Snare" IsCheckable="True" StaysOpenOnClick="True"  Click="Snare_Click"/>
+                        <MenuItem Header="Tom" IsCheckable="True" StaysOpenOnClick="True"  Click="Tom_Click"/>
+                        <MenuItem Header="Roto-Tom" IsCheckable="True" StaysOpenOnClick="True"  Click="RotoTom_Click"/>
+                        <MenuItem Header="Floor-Tom" IsCheckable="True" StaysOpenOnClick="True" Click="FloorTom_Click"/>
                     </ContextMenu>
                 </Grid.ContextMenu>
             </Grid>
