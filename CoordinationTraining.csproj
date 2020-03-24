@@ -74,7 +74,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Eighth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Fourth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Rhythm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Sixtennth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ThirtySecond.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -90,17 +106,25 @@
     <Compile Include="Classes\OneBit.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Controls\Casses\Tact.cs" />
+    <Compile Include="Controls\Eighth.xaml.cs">
+      <DependentUpon>Eighth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Fourth.xaml.cs">
+      <DependentUpon>Fourth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Rhythm.xaml.cs">
       <DependentUpon>Rhythm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sixtennth.xaml.cs">
+      <DependentUpon>Sixtennth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThirtySecond.xaml.cs">
+      <DependentUpon>ThirtySecond.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -133,6 +157,8 @@
     <Content Include="Resources\cut.wav" />
     <Resource Include="Resources\remove.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,61 +15,41 @@ using System.Windows.Shapes;
 
 namespace CoordinationTraining.Controls
 {
+    
     public partial class Rhythm : UserControl
     {
-        ObservableCollection<Grid> GridEventsColl;
-        ObservableCollection<(Grid, Grid, Grid, Grid, Grid)> GridEventsCol1l;
         public Rhythm()
         {
             InitializeComponent();
-            InitColls();
         }
-
-        void InitColls()
+        
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GridEventsColl = new ObservableCollection<Grid>();
-            GridEventsColl.Add(Menu_0);
-            GridEventsColl.Add(Menu_1);
-        }
-
-        private void HiHat_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem mnu = sender as MenuItem;
-            Grid sp = null;
-            if (mnu != null)
+            if(_FirstNote == null)
             {
-                sp = ((ContextMenu)mnu.Parent).PlacementTarget as Grid;
+                return;
             }
-            int i = Convert.ToInt32(sp.Name[sp.Name.Length - 1] - 48);
-            
-            if (GridEventsColl[i].Visibility == Visibility.Visible)
+
+            _FirstNote.Children.Remove(_FirstNote.Children[0]);
+            ComboBox cb = sender as ComboBox;
+
+            switch (cb.SelectedIndex)
             {
-                GridEventsColl[i].Visibility = Visibility.Hidden;
+                case 0:
+                    _FirstNote.Children.Add(new Fourth());
+                    break;
+                case 1:
+                    _FirstNote.Children.Add(new Eighth());
+                    break;
+                case 2:
+                    _FirstNote.Children.Add(new Sixtennth());
+                    break;
+                case 3:
+                    _FirstNote.Children.Add(new ThirtySecond());
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                GridEventsColl[i].Visibility = Visibility.Visible;
-            }
-        }
-
-        private void Snare_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Tom_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RotoTom_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void FloorTom_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

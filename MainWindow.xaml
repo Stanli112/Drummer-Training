@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:CoordinationTraining"
-        xmlns:locals="clr-namespace:CoordinationTraining.Controls"
+        xmlns:locals="clr-namespace:CoordinationTraining.Controls"     
         mc:Ignorable="d"
         Closed="Window_Closed"
         MinWidth="1200" MinHeight="600"
@@ -529,15 +529,10 @@
             </Grid>
 
             
-            
-            <Grid Grid.Row="2" Grid.Column="0">
 
+            <Grid Grid.Row="2" Grid.Column="0">
                 <Grid x:Name="GridMainBeatCreator">
-                    <StackPanel Orientation="Horizontal">
-                        <locals:Rhythm/>
-                        <locals:Rhythm/>
-                        <locals:Rhythm/>
-                    </StackPanel>
+                    <locals:Rhythm/>
                 </Grid>
                 
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Hidden">
