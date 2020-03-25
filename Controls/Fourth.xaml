@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
+             
              mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="90"
-             MaxHeight="180" MaxWidth="90"
-             MinHeight="180" MinWidth="90">
+             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="90"
+             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="90"
+             MinHeight="{StaticResource TactSizeHeight}" MinWidth="90">
     
     <!-- wi x he -->
-    <!-- 30 x 60 -->
+    <!-- 30 x 60 + 80-->
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -21,6 +22,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="110"/>
             </Grid.RowDefinitions>
 
             <!-- LINES -->
@@ -40,8 +42,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="6" Width="4" HorizontalAlignment="Center" Fill="#6E5EC7" Margin="0,0,0,19"/>
-                <Ellipse Width="40" Height="25" Fill="#6E5EC7" Grid.Row="5">
+                <Rectangle Grid.Row="0" Grid.RowSpan="6" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource BassDrum_CB}" Margin="0,0,0,19"/>
+                <Ellipse Width="40" Height="25" Fill="{DynamicResource BassDrum_CB}" Grid.Row="5">
                     <Ellipse.RenderTransform>
                         <RotateTransform Angle="-15" CenterX="8" CenterY="80"/>
                     </Ellipse.RenderTransform>
@@ -57,8 +59,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="5" Width="4" HorizontalAlignment="Center" Fill="#00FFA9" Margin="0,0,0,19"/>
-                <Ellipse Width="40" Height="25" Fill="#00FFA9" Grid.Row="4">
+                <Rectangle Grid.Row="0" Grid.RowSpan="5" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource FloorTom_CB}" Margin="0,0,0,19"/>
+                <Ellipse Width="40" Height="25" Fill="{DynamicResource FloorTom_CB}" Grid.Row="4">
                     <Ellipse.RenderTransform>
                         <RotateTransform Angle="-15" CenterX="8" CenterY="80"/>
                     </Ellipse.RenderTransform>
@@ -73,8 +75,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="4" Width="4" HorizontalAlignment="Center" Fill="#FFDD00" Margin="0,0,0,19"/>
-                <Ellipse Width="40" Height="25" Fill="#FFDD00" Grid.Row="3">
+                <Rectangle Grid.Row="0" Grid.RowSpan="4" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource Snare_CB}" Margin="0,0,0,19"/>
+                <Ellipse Width="40" Height="25" Fill="{DynamicResource Snare_CB}" Grid.Row="3">
                     <Ellipse.RenderTransform>
                         <RotateTransform Angle="-15" CenterX="8" CenterY="80"/>
                     </Ellipse.RenderTransform>
@@ -89,8 +91,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="3" Width="4" HorizontalAlignment="Center" Fill="White"/>
-                <Ellipse Width="40" Height="25" Fill="White" Grid.Row="2" Grid.RowSpan="2">
+                <Rectangle Grid.Row="0" Grid.RowSpan="3" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource MidTom_CB}"/>
+                <Ellipse Width="40" Height="25" Fill="{DynamicResource MidTom_CB}" Grid.Row="2" Grid.RowSpan="2">
                     <Ellipse.RenderTransform>
                         <RotateTransform Angle="-15" CenterX="8" CenterY="80"/>
                     </Ellipse.RenderTransform>
@@ -104,8 +106,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="3" Width="4" HorizontalAlignment="Center" Fill="#2196F3" Margin="0,0,0,19"/>
-                <Ellipse Width="40" Height="25" Fill="#2196F3" Grid.Row="3">
+                <Rectangle Grid.Row="0" Grid.RowSpan="3" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource HightTom_CB}" Margin="0,0,0,19"/>
+                <Ellipse Width="40" Height="25" Fill="{DynamicResource HightTom_CB}" Grid.Row="3">
                     <Ellipse.RenderTransform>
                         <RotateTransform Angle="-15" CenterX="8" CenterY="80"/>
                     </Ellipse.RenderTransform>
@@ -119,16 +121,20 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Row="0" Grid.RowSpan="2" Width="4" HorizontalAlignment="Center" Fill="#6E5EC7"/>
+                <Rectangle Grid.Row="0" Grid.RowSpan="2" Width="4" HorizontalAlignment="Center" Fill="{DynamicResource HiHat_CB}"/>
 
                 <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Width="30" Height="30">
-                    <Line X1="0" Y1="0" X2="30" Y2="30" Stroke="#6E5EC7" StrokeThickness="3"/>
-                    <Line X1="0" Y1="30" X2="30" Y2="0" Stroke="#6E5EC7" StrokeThickness="3"/>
+                    <Line X1="0" Y1="0" X2="30" Y2="30" Stroke="{DynamicResource HiHat_CB}" StrokeThickness="3"/>
+                    <Line X1="0" Y1="30" X2="30" Y2="0" Stroke="{DynamicResource HiHat_CB}" StrokeThickness="3"/>
                 </Grid>
             </Grid>
 
+            <!-- Help -->
+            <TextBlock x:Name="Help" Grid.Row="7" Foreground="White" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
             <!-- Events -->
-            <Grid x:Name="Tact" Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Background="Transparent">
+            <Grid x:Name="Tact" Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Style="{StaticResource GridEventStyle}">
                 <Grid.ContextMenu>
                     <ContextMenu StaysOpen="True">
                         <MenuItem Header="Hi-Hat" IsCheckable="True" StaysOpenOnClick="True"  Click="HiHat_Click" IsChecked="True"/>

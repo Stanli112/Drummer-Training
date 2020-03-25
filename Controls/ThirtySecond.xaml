@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="360"
-             MaxHeight="180" MaxWidth="360"
-             MinHeight="180" MinWidth="360">
+             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="360"
+             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="360"
+             MinHeight="{StaticResource TactSizeHeight}" MinWidth="360">
     <Grid>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="#6E5EC7" Margin="43, 0"/>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="#6E5EC7" Margin="43, 15, 43, 0"/>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="#6E5EC7" Margin="43, 30, 43, 0"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 0"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 15, 43, 0"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 30, 43, 0"/>
         <StackPanel Orientation="Horizontal">
             <local:Fourth/>
             <local:Fourth/>

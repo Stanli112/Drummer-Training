@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="180"
-             MaxHeight="180" MaxWidth="180"
-             MinHeight="180" MinWidth="180">
+             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="180"
+             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="180"
+             MinHeight="{StaticResource TactSizeHeight}" MinWidth="180">
     <Grid>
 
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="#6E5EC7" Margin="43, 0"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 0"/>
         <StackPanel Orientation="Horizontal">
             <local:Fourth/>
             <local:Fourth/>
