@@ -24,6 +24,8 @@
 
 
     <v:Double x:Key="TactSizeHeight">300</v:Double>
+    <v:Double x:Key="CustomTactSizeHeight">350</v:Double>
+    
     <GridLength x:Key="TactSizeHeightForGrid">300</GridLength>
 
 </ResourceDictionary>

@@ -44,7 +44,7 @@ namespace CoordinationTraining.Controls
             if (bFloorTom)
                 text += "FloorTom\n";
             if (bBassDrum)
-                text += "BassDrum";
+                text += "BassDrum\n";
 
             Help.Text = text;
         }

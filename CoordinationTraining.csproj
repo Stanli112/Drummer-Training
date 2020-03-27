@@ -74,6 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CustomTact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Eighth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +114,9 @@
     <Compile Include="Classes\OneBit.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Controls\Casses\Tact.cs" />
+    <Compile Include="Controls\CustomTact.xaml.cs">
+      <DependentUpon>CustomTact.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Eighth.xaml.cs">
       <DependentUpon>Eighth.xaml</DependentUpon>
     </Compile>

@@ -5,71 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             MaxHeight="400" MaxWidth="1440"
-             MinHeight="400" MinWidth="360">
+             MaxHeight="{StaticResource CustomTactSizeHeight}" MaxWidth="1440"
+             MinHeight="{StaticResource CustomTactSizeHeight}" MinWidth="360">
     <Grid>
         <StackPanel Orientation="Horizontal">
 
-            <Grid x:Name="FirstNote">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="{StaticResource TactSizeHeightForGrid}"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Width="100" Height="20">
-                    <ComboBox SelectionChanged="ComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Fourth" IsSelected="True"/>
-                        <ComboBoxItem Content="Eighth"/>
-                        <ComboBoxItem Content="Sixteenth"/>
-                        <ComboBoxItem Content="Thirty Second"/>
-                    </ComboBox>
-                </Grid>
-                <Grid Grid.Row="1" x:Name="_FirstNote">
-                    <local:Sixtennth/>
-                </Grid>
-                
+            <Grid x:Name="FirstNote" Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact/>
             </Grid>
 
-            <Grid x:Name="SecondNote">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="270"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                </Grid>
-                <Grid Grid.Row="1">
-                    <local:Sixtennth/>
-                </Grid>
-
+            <Grid x:Name="SecondNote" Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact/>
             </Grid>
 
-            <Grid x:Name="ThirdNote">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="270"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                </Grid>
-                <Grid Grid.Row="1">
-                    <local:Sixtennth/>
-                </Grid>
-
+            <Grid x:Name="ThirdNote" Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact/>
             </Grid>
 
-            <Grid x:Name="FourNote">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="270"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                </Grid>
-                <Grid Grid.Row="1">
-                    <local:Sixtennth/>
-                </Grid>
-
+            <Grid x:Name="FourNote" Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact/>
             </Grid>
             
         </StackPanel>

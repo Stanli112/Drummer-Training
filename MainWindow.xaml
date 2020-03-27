@@ -472,10 +472,10 @@
             <Grid x:Name="GridBar" Grid.Row="1" Grid.ColumnSpan="2" Background="#2D2D30" >
 
                 <Grid x:Name="GridBarBeatCreator">
-                    
+                    <Button x:Name="btnSaveRythm"/>
                 </Grid>
                 
-                <Grid x:Name="GridBarCoordTrening">
+                <Grid x:Name="GridBarCoordTrening" Visibility="Hidden">
                     
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0">
 
@@ -532,7 +532,11 @@
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Grid x:Name="GridMainBeatCreator">
-                    <locals:Rhythm/>
+                    <StackPanel Orientation="Horizontal">
+                        <locals:Rhythm/>
+                        <locals:Rhythm/>
+                        <locals:Rhythm/>
+                    </StackPanel>
                 </Grid>
                 
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Hidden">

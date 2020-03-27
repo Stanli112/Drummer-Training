@@ -21,35 +21,6 @@ namespace CoordinationTraining.Controls
         public Rhythm()
         {
             InitializeComponent();
-        }
-        
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(_FirstNote == null)
-            {
-                return;
-            }
-
-            _FirstNote.Children.Remove(_FirstNote.Children[0]);
-            ComboBox cb = sender as ComboBox;
-
-            switch (cb.SelectedIndex)
-            {
-                case 0:
-                    _FirstNote.Children.Add(new Fourth());
-                    break;
-                case 1:
-                    _FirstNote.Children.Add(new Eighth());
-                    break;
-                case 2:
-                    _FirstNote.Children.Add(new Sixtennth());
-                    break;
-                case 3:
-                    _FirstNote.Children.Add(new ThirtySecond());
-                    break;
-                default:
-                    break;
-            }
-        }
+        }        
     }
 }
