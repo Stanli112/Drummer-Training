@@ -17,7 +17,7 @@ namespace CoordinationTraining.Controls
 {
     public partial class CustomTact : UserControl
     {
-        enum TactType
+        public enum TactType
         {
             TT_FOURTH,
             TT_EIGHTH,
@@ -25,15 +25,17 @@ namespace CoordinationTraining.Controls
             TT_THIRTYSECOND
         }
 
-        Fourth          _fourth;
-        Eighth          _eighth;
-        Sixtennth       _sixteenth;
-        ThirtySecond    _thirtysecond;
+        public TactType     Type;
+        public Fourth       _fourth;
+        public Eighth       _eighth;
+        public Sixtennth    _sixteenth;
+        public ThirtySecond _thirtysecond;
 
         public CustomTact()
         {
             InitializeComponent();
 
+            Type = TactType.TT_FOURTH;
             _fourth = new Fourth();
             _eighth = new Eighth();
             _sixteenth = new Sixtennth();
@@ -55,18 +57,22 @@ namespace CoordinationTraining.Controls
                 case 0:
                     GridNote.Children.Add(_fourth);
                     GridMain.Width = 90;
+                    Type = TactType.TT_FOURTH;
                     break;
                 case 1:
                     GridNote.Children.Add(_eighth);
                     GridMain.Width = 90 * 2;
+                    Type = TactType.TT_EIGHTH;
                     break;
                 case 2:
                     GridNote.Children.Add(_sixteenth);
                     GridMain.Width = 90 * 4;
+                    Type = TactType.TT_SIXTEEN;
                     break;
                 case 3:
                     GridNote.Children.Add(_thirtysecond);
                     GridMain.Width = 90 * 4;
+                    Type = TactType.TT_SIXTEEN;
                     break;
                 default:
                     break;

@@ -22,6 +22,7 @@ using System.Windows.Media.Animation;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using CoordinationTraining.Controls;
 
 namespace CoordinationTraining
 {
@@ -508,7 +509,51 @@ namespace CoordinationTraining
                     break;
             }
         }
-        
+
         #endregion
+
+        private void btnAddRythm_Click(object sender, RoutedEventArgs e)
+        {
+            AddRhythmToStackPanel(spRhythm);
+        }
+
+        private void btnAddBreak_Click(object sender, RoutedEventArgs e)
+        {
+            AddRhythmToStackPanel(spBreak);
+        }
+
+        void AddRhythmToStackPanel(StackPanel sp)
+        {
+            if (sp.Children.Count > 0)
+            {
+                sp.Children.Add(new Grid()
+                {
+                    Background = Brushes.White,
+                    Margin = new Thickness(0, 100, 0, 100),
+                    Width = 2
+                });
+            }
+            sp.Children.Add(new Controls.Rhythm());
+        }
+
+        private void btnSaveRythm_Click(object sender, RoutedEventArgs e)
+        {
+            if(tbNameRhythm.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Придумай название!", "Warning", MessageBoxButton.OK); 
+                tbNameRhythm.Focus();
+                return;
+            }
+
+            ObservableCollection<Rhythm> rColl = new ObservableCollection<Rhythm>();
+            foreach (object child in spRhythm.Children)
+            {
+                if(child.GetType().Name == "Rhythm")
+                {
+                    rColl.Add((Rhythm)child);
+                }
+            }
+            string str = JsonConvert.SerializeObject(rColl[0]._firstNote.Type);
+        }
     }
 }

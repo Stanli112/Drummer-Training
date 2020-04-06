@@ -5,25 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             MaxHeight="{StaticResource CustomTactSizeHeight}" MaxWidth="1440"
-             MinHeight="{StaticResource CustomTactSizeHeight}" MinWidth="360">
+             MaxHeight="400" MaxWidth="1440"
+             MinHeight="400" MinWidth="360"
+             >
     <Grid>
         <StackPanel Orientation="Horizontal">
 
-            <Grid x:Name="FirstNote" Height="{StaticResource CustomTactSizeHeight}">
-                <local:CustomTact/>
+            <Grid Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact x:Name="_firstNote"/>
             </Grid>
 
-            <Grid x:Name="SecondNote" Height="{StaticResource CustomTactSizeHeight}">
-                <local:CustomTact/>
+            <Grid Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact x:Name="_secondNote"/>
             </Grid>
 
-            <Grid x:Name="ThirdNote" Height="{StaticResource CustomTactSizeHeight}">
-                <local:CustomTact/>
+            <Grid Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact x:Name="_thirdNote"/>
             </Grid>
 
-            <Grid x:Name="FourNote" Height="{StaticResource CustomTactSizeHeight}">
-                <local:CustomTact/>
+            <Grid Height="{StaticResource CustomTactSizeHeight}">
+                <local:CustomTact x:Name="_fourNote"/>
             </Grid>
             
         </StackPanel>

@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace CoordinationTraining.Controls
 {
-    
     public partial class Rhythm : UserControl
     {
         public Rhythm()

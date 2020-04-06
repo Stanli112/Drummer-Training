@@ -8,12 +8,14 @@
         xmlns:locals="clr-namespace:CoordinationTraining.Controls"     
         mc:Ignorable="d"
         Closed="Window_Closed"
-        MinWidth="1200" MinHeight="600"
-        Title="MyManager" Height="800" Width="1500"
+        MinWidth="1200" MinHeight="1000"
+        Title="MyManager" Height="1000" Width="1500"
         Background="#3E3E42"
-        WindowStyle="None" ResizeMode="NoResize">
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
+        
         <Storyboard x:Key="OpenTaskColl">
             <DoubleAnimation Storyboard.TargetProperty="Width" 
                              Storyboard.TargetName="GridRightMenu" Duration="0:0:0.3" To="270" />
@@ -22,6 +24,7 @@
             <DoubleAnimation Storyboard.TargetProperty="Width" 
                              Storyboard.TargetName="GridLeg" Duration="0:0:0.3" To="1500" />
         </Storyboard>
+        
         <Storyboard x:Key="CloseTaskColl">
             <DoubleAnimation Storyboard.TargetProperty="Width" 
                              Storyboard.TargetName="GridRightMenu" Duration="0:0:0.3" To="0" />
@@ -118,6 +121,167 @@
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type Button}" x:Key="BtnAddRhythm">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"></Rectangle>
+                            <Rectangle Height="2" Width="20" Fill="#2196F3"/>
+                            <Rectangle Height="20" Width="2" Fill="#2196F3"/>
+
+                            <Grid Height="17" Background="#2D2D30" Width="13" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock Text="Р" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       FontSize="22" FontWeight="DemiBold" Foreground="Orange" Margin="0, 0, 0,-5"
+                                       />
+                            
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnSaveRhythm">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+
+                            <Rectangle x:Name="mainBorder" Fill="#2196F3" Width="35" Height="35" RadiusX="5" RadiusY="5" />
+
+                            <Rectangle x:Name="TopBorder" Fill="#2D2D30" Width="20" Height="12" RadiusX="2" RadiusY="2" 
+                                       VerticalAlignment="Top" Margin="0, 3, 0, 0"/>
+                            <Rectangle x:Name="BottomBorder" Fill="#2D2D30" Width="26" Height="17" RadiusX="3" RadiusY="3" 
+                                       VerticalAlignment="Bottom" Margin="0, 0, 0, 5"/>
+                            
+                            <Polygon Fill="#2D2D30" Points="27, 0, 40, 0, 40, 12"/>
+                            <Polygon x:Name="smallBorder" Fill="#2196F3" Points="23, 4, 23, 14, 26, 14, 26, 4"/>
+
+                            <Grid Height="19" Background="#2D2D30" Width="14" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock Text="Р" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       FontSize="22" FontWeight="DemiBold" Foreground="Orange" Margin="0, 0, 0,-5" />
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="mainBorder" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="TopBorder" Value="#1E1E1E"/>
+                                <Setter Property="Fill" TargetName="BottomBorder" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="smallBorder" Value="Green"/>
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="smallBorder" Value="Brown"/>
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Brown"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnAddBreak">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"></Rectangle>
+                            <Rectangle Height="2" Width="20" Fill="#2196F3"/>
+                            <Rectangle Height="20" Width="2" Fill="#2196F3"/>
+
+                            <Grid Height="18" Background="#2D2D30" Width="13" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock Text="С" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       FontSize="22" FontWeight="DemiBold" Foreground="Orange" Margin="0, 0, 0,-5"/>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnSaveBreak">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+
+                            <Rectangle x:Name="mainBorder" Fill="#2196F3" Width="35" Height="35" RadiusX="5" RadiusY="5" />
+
+                            <Rectangle x:Name="TopBorder" Fill="#2D2D30" Width="20" Height="12" RadiusX="2" RadiusY="2" 
+                                       VerticalAlignment="Top" Margin="0, 3, 0, 0"/>
+                            <Rectangle x:Name="BottomBorder" Fill="#2D2D30" Width="26" Height="17" RadiusX="3" RadiusY="3" 
+                                       VerticalAlignment="Bottom" Margin="0, 0, 0, 5"/>
+
+                            <Polygon Fill="#2D2D30" Points="27, 0, 40, 0, 40, 12"/>
+                            <Polygon x:Name="smallBorder" Fill="#2196F3" Points="23, 4, 23, 14, 26, 14, 26, 4"/>
+
+                            <Grid Height="19" Background="#2D2D30" Width="14" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock Text="С" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       FontSize="22" FontWeight="DemiBold" Foreground="Orange" Margin="0, 0, 0,-5" />
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="mainBorder" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="TopBorder" Value="#1E1E1E"/>
+                                <Setter Property="Fill" TargetName="BottomBorder" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="smallBorder" Value="Green"/>
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="smallBorder" Value="Brown"/>
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Brown"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="{x:Type Button}" x:Key="BtnManageBarPlus">
             <Setter Property="Width" Value="25"/>
             <Setter Property="Height" Value="25"/>
@@ -472,7 +636,21 @@
             <Grid x:Name="GridBar" Grid.Row="1" Grid.ColumnSpan="2" Background="#2D2D30" >
 
                 <Grid x:Name="GridBarBeatCreator">
-                    <Button x:Name="btnSaveRythm"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <Button x:Name="btnAddRythm" Style="{StaticResource BtnAddRhythm}" 
+                                ToolTip="Добавить ритм" Margin="5, 0" Click="btnAddRythm_Click"/>
+                        <Button x:Name="btnSaveRythm" Style="{StaticResource BtnSaveRhythm}" 
+                                ToolTip="Сохранить ритм" Margin="5, 0" Click="btnSaveRythm_Click"/>
+
+                        <Grid Width="50"/>
+
+                        <Button x:Name="btnAddBreak" Style="{StaticResource BtnAddBreak}" 
+                                ToolTip="Добавить сбивку(break)" Margin="5, 0" Click="btnAddBreak_Click"/>
+                        <Button x:Name="btnSaveBreak" Style="{StaticResource BtnSaveBreak}"  
+                                ToolTip="Сохранить сбивку(break)" Margin="5, 0"/>
+
+                    </StackPanel>
                 </Grid>
                 
                 <Grid x:Name="GridBarCoordTrening" Visibility="Hidden">
@@ -532,11 +710,56 @@
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Grid x:Name="GridMainBeatCreator">
-                    <StackPanel Orientation="Horizontal">
-                        <locals:Rhythm/>
-                        <locals:Rhythm/>
-                        <locals:Rhythm/>
-                    </StackPanel>
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="450"/>
+                            <RowDefinition Height="450"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" >
+
+                                <Label Content="Ритм:" FontSize="30" Foreground="White"/>
+                                <TextBox x:Name="tbNameRhythm" Text="My first rhythm" MaxLength="20" Foreground="Orange"
+                                         Style="{StaticResource TbMinimalStyle}" 
+                                         FontSize="25" Height="35" Margin="0, 5, 0, 0"/>
+
+                            </StackPanel>
+                            
+                            <ScrollViewer Grid.Row="1"  
+                                          VerticalScrollBarVisibility="Hidden" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalAlignment="Center">
+                                <StackPanel x:Name="spRhythm" Orientation="Horizontal" HorizontalAlignment="Center"/>
+
+                            </ScrollViewer>
+                            
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Сбивка (Break)" FontSize="30" HorizontalAlignment="Center" Foreground="White"/>
+                            <ScrollViewer Grid.Row="1" 
+                                          VerticalScrollBarVisibility="Hidden" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalAlignment="Center">
+                                <StackPanel x:Name="spBreak" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                            </ScrollViewer>
+                        </Grid>
+
+                    </Grid>
+
                 </Grid>
                 
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Hidden">
