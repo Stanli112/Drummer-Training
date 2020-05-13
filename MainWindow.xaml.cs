@@ -23,11 +23,14 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CoordinationTraining.Controls;
+using static CoordinationTraining.Controls.CustomTact;
+using CoordinationTraining.Controls.MiniNotes;
 
 namespace CoordinationTraining
 {
     public partial class MainWindow : Window
     {
+        public TactType BPS_type;
         const string lblMainBeat = "Beat creator";
         const string lblMainCoor = "Coordination training";
         #region Title
@@ -110,6 +113,7 @@ namespace CoordinationTraining
 
         /// <summary> Звук метронома - используется в тренеровке </summary>
         private SoundPlayer MetronomeSound;
+        private SoundPlayer MetronomeSound_delete;
         /// <summary> Хранит настройки проекта </summary>        
         private Settings settings = new Settings();
         /// <summary> Выбранное в списке задание </summary>        
@@ -133,11 +137,19 @@ namespace CoordinationTraining
             MetronomeSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             MetronomeSound.Load();
 
+            MetronomeSound_delete = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
+            MetronomeSound_delete.Load();
 
             LbTaskColl.ItemsSource = g_PlayListColl;
             GetFirstItemInMaOnWindow();
 
             ShowPage(_page.beat);
+
+            foreach(TactType type in Enum.GetValues(typeof(TactType)))
+            {
+                cbNotes.Items.Add(new CustomTact_mini(type));
+            }
+            cbNotes.SelectedItem = cbNotes.Items[0];
         }
 
         #region Coordination Training
@@ -283,22 +295,43 @@ namespace CoordinationTraining
             settings.RepeatCount = rep;
         }
 
+        private void BtnBPS_Click(object sender, RoutedEventArgs e)
+        {
+            int bps = Convert.ToInt32(txtBPS.Text);
+            if (((Button)sender).Name == "BtnBPSMinus")
+            {
+                if (bps > 40)
+                {
+                    bps -= 1;
+                }
+            }
+            if (((Button)sender).Name == "BtnBPSPlus")
+            {
+                if (bps < 200)
+                {
+                    bps += 1;
+                }
+            }
+            txtBPS.Text = bps.ToString();
+            settings.BPS = bps;
+        }
+        
         #endregion
 
 
         #region Правая менюшка
 
-        private void RightMenu_Click(object sender, RoutedEventArgs e)
-        {
-            if (GridRightMenu.Width > 0)
-            {
-                BeginStoryboard((Storyboard)this.FindResource("CloseTaskColl"));
-            }
-            else
-            {
-                BeginStoryboard((Storyboard)this.FindResource("OpenTaskColl"));
-            }            
-        }
+        //private void RightMenu_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (GridRightMenu.Width > 0)
+        //    {
+        //        BeginStoryboard((Storyboard)this.FindResource("CloseTaskColl"));
+        //    }
+        //    else
+        //    {
+        //        BeginStoryboard((Storyboard)this.FindResource("OpenTaskColl"));
+        //    }            
+        //}
         
         private void cpIllumination_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
@@ -339,7 +372,8 @@ namespace CoordinationTraining
         {
             for (int k = 0; k < _bitCount; k++)
             {
-                Thread.Sleep(settings.Amplitude);
+                double kek = 1000 / ((double)settings.BPS / 60 * (int)BPS_type);
+                Thread.Sleep( (int)kek );//settings.Amplitude);
                 MetronomeSound.Play();
                 Dispatcher.Invoke(() =>
                 {
@@ -369,6 +403,7 @@ namespace CoordinationTraining
             txtRepeat.Text = settings.RepeatCount.ToString();
             cpIllumination.Background = settings.colorIllumination;
             cbMetronom.IsChecked = settings.UseMetronom;
+            txtBPS.Text = settings.BPS.ToString();
         }
         
         /// <summary> Включает/Отключает кнопки при тренеровке </summary>
@@ -554,6 +589,19 @@ namespace CoordinationTraining
                 }
             }
             string str = JsonConvert.SerializeObject(rColl[0]._firstNote.Type);
+        }
+
+        private void cbNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BPS_type = ((CustomTact_mini)(sender as ComboBox).SelectedItem)._type;
+        }
+
+        private async void BtnAddToCollMetr_Click(object sender, RoutedEventArgs e)
+        {
+            // хрень 
+            await Task.Run(() => MetronomeSound.PlayLooping());
+            Thread.Sleep(300);
+            await Task.Run(() => MetronomeSound_delete.PlayLooping());
         }
     }
 }

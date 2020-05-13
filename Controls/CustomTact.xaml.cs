@@ -19,8 +19,9 @@ namespace CoordinationTraining.Controls
     {
         public enum TactType
         {
-            TT_FOURTH,
+            TT_FOURTH = 1,
             TT_EIGHTH,
+            TT_THREEOL,
             TT_SIXTEEN,
             TT_THIRTYSECOND
         }

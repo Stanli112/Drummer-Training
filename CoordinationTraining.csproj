@@ -86,6 +86,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MiniNotes\CustomTact_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\Eight_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\Fourth_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\NoteMini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\Sixteenth_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\ThirtySecond_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\Threeol_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Resources\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +150,27 @@
     </Compile>
     <Compile Include="Controls\Fourth.xaml.cs">
       <DependentUpon>Fourth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\CustomTact_mini.xaml.cs">
+      <DependentUpon>CustomTact_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\Eight_mini.xaml.cs">
+      <DependentUpon>Eight_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\Fourth_mini.xaml.cs">
+      <DependentUpon>Fourth_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\NoteMini.xaml.cs">
+      <DependentUpon>NoteMini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\Sixteenth_mini.xaml.cs">
+      <DependentUpon>Sixteenth_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\ThirtySecond_mini.xaml.cs">
+      <DependentUpon>ThirtySecond_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\Threeol_mini.xaml.cs">
+      <DependentUpon>Threeol_mini.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Rhythm.xaml.cs">
       <DependentUpon>Rhythm.xaml</DependentUpon>

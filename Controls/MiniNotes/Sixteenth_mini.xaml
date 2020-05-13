@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CoordinationTraining.Controls.MiniNotes.Sixteenth_mini"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoordinationTraining.Controls.MiniNotes"
+             mc:Ignorable="d" 
+             MaxHeight="25" MaxWidth="60"
+             MinHeight="25" MinWidth="60">
+    <Grid>
+        <Rectangle Height="1"  VerticalAlignment="Top" Fill="Black" Margin="12, 4, 12, 0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <local:NoteMini Margin="1,0"/>
+            <local:NoteMini Margin="1,0"/>
+            <local:NoteMini Margin="1,0"/>
+            <local:NoteMini Margin="1,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

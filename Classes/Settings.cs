@@ -29,6 +29,7 @@ namespace CoordinationTraining.Classes
 
         /// <summary> Количество повторов выполняемого задания </summary>
         public int Amplitude { get; set; }
+        public int BPS { get; set; }
 
         /// <summary> Использовать метроном </summary>
         public bool UseMetronom { get; set; }
