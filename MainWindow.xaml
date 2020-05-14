@@ -780,9 +780,9 @@
                             <Button x:Name="btnPlayMetronomList" Style="{StaticResource BtnPlay}" 
                                     Margin="5,0" ToolTip="Запустить/Отключить метроном" />
                             <Button x:Name="BtnAddToCollMetr" Style="{StaticResource BtnManageBarPlus}" 
-                                    Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
+                                    Margin="5,0" ToolTip="Добавить в тренировочный лист" Click="BtnAddToCollMetr_Click"/>
 
-                            <locale:CustomTactForAutoPlay_mini/>
+                            <locale:CustomTactForAutoPlay_mini x:Name="_testCustom"/>
                         </StackPanel>
                         
                     </StackPanel>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +33,10 @@ namespace CoordinationTraining.Controls.MiniNotes
         public int _BPM;
         public int _repeat;
 
+        /// <summary> Звук метронома - используется в тренеровке </summary>
+        private SoundPlayer FirstBitSound;
+        private SoundPlayer SecondBitSound;
+
         // не нравится мне это
         private Fourth_mini _fourth;
         private Eight_mini _eigth;
@@ -42,11 +49,21 @@ namespace CoordinationTraining.Controls.MiniNotes
             _type = TactType.TT_FOURTH;
             InitializeComponent();
             InitTT();
+
+            FirstBitSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\firstBit.wav");
+            FirstBitSound.Load();
+
+            SecondBitSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\secondBit2.wav");
+            SecondBitSound.Load();
         }
 
-        public CustomTactForAutoPlay_mini(TactType type)
+        /// я хер его знает, зачем он нужен
+        public CustomTactForAutoPlay_mini(TactType type, SoundPlayer _fs, SoundPlayer _ss)
         {
             InitializeComponent();
+
+            FirstBitSound = _fs;
+            SecondBitSound = _ss;
 
             _type = type;
             switch (type)
@@ -163,9 +180,28 @@ namespace CoordinationTraining.Controls.MiniNotes
             snt.ShowDialog();
             InitTT();
         }
+        
         void InitTT()
         {
             ct.SetTact(_type);
+        }
+
+        public void Play()
+        {            
+            for(int i = 0; i < _repeat; i++)   // кол-во повторов
+            {
+                double _pause = 1000 / ((double)_BPM / 60 * (int)_type);
+                Thread.Sleep((int)_pause);
+
+                FirstBitSound.Play();
+
+                for (int j = 0; j < (int)_type - 1; j++)
+                {
+                    //_pause = 1000 / ((double)_BPM / 60 * (int)_type);
+                    Thread.Sleep((int)_pause);                    
+                    SecondBitSound.Play();
+                }
+            }
         }
     }
 }

@@ -615,5 +615,10 @@ namespace CoordinationTraining
         {
             BPS_type = ((CustomTact_mini)(sender as ComboBox).SelectedItem)._type;
         }
+
+        private void BtnAddToCollMetr_Click(object sender, RoutedEventArgs e)
+        {
+            _testCustom.Play();
+        }
     }
 }

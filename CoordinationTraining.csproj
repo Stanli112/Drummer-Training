@@ -238,6 +238,9 @@
     <Content Include="Resources\secondBit.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\secondBit2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\remove.png" />
   </ItemGroup>
   <ItemGroup>
