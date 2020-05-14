@@ -9,8 +9,8 @@
         xmlns:locale="clr-namespace:CoordinationTraining.Controls.MiniNotes"     
         mc:Ignorable="d"
         Closed="Window_Closed"
-        MinWidth="1200" MinHeight="1000"
-        Title="MyManager" Height="1000" Width="1500"
+        MinWidth="1200" MinHeight="800"
+        Title="MyManager" Height="800" Width="1500"
         Background="#3E3E42"
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
@@ -568,7 +568,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="120"/>
+            <Setter Property="FontSize" Value="100"/>
         </Style>
         
     </Window.Resources>
@@ -699,7 +699,8 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" >
+                            <!-- УДОЛИ -->
+                            <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" Visibility="Hidden">
 
                                 <Label Content="Ритм:" FontSize="30" Foreground="White"/>
                                 <TextBox x:Name="tbNameRhythm" Text="My first rhythm" MaxLength="20" Foreground="Orange"
@@ -741,8 +742,8 @@
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Visible">
                     
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="300"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="2.5*"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -750,7 +751,7 @@
                         <ColumnDefinition Width="270"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0" x:Name="spMetronom" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <StackPanel Grid.Row="0" x:Name="spMetronom" Orientation="Vertical" VerticalAlignment="Top" >
                         <Label Content="Метроном" HorizontalContentAlignment="Center"
                                    Foreground="#2196F3" FontSize="60" Margin="0,5,0,0"/>
                         
@@ -764,19 +765,24 @@
 
                             <Button x:Name="BtnBPSPlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnBPS_Click"/>
 
-                            <ComboBox Name="cbNotes" Width="100" Height="30" Margin="15,0" SelectionChanged="cbNotes_SelectionChanged">
-                                
-                                <!--<ComboBoxItem Content="fourth" IsSelected="True"/>
-                                <ComboBoxItem Content="eight"/>
-                                <ComboBoxItem Content="threeol"/>
-                                <ComboBoxItem Content="sixteenth"/>-->
-                            </ComboBox>
+                            <ComboBox Name="cbNotes" Width="100" Height="30" Margin="15,0" SelectionChanged="cbNotes_SelectionChanged"/>
 
                             <Button x:Name="PlayMetronom" Style="{StaticResource BtnPlay}" 
                                     Margin="5,0" ToolTip="Запустить/Отключить метроном" Click="PlayMetronom_Click"/>
-                            <Button x:Name="BtnAddToCollMetr" Click="BtnAddToCollMetr_Click" Style="{StaticResource BtnManageBarPlus}" 
-                                    Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
+                            <!--<Button x:Name="BtnAddToCollMetr" Click="BtnAddToCollMetr_Click" Style="{StaticResource BtnManageBarPlus}" 
+                                    Margin="5,0" ToolTip="Добавить в тренировочный лист"/>-->
                             
+                        </StackPanel>
+
+                        <Grid Background="#2196F3" Height="3" Margin="150, 10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnPlayMetronomList" Style="{StaticResource BtnPlay}" 
+                                    Margin="5,0" ToolTip="Запустить/Отключить метроном" />
+                            <Button x:Name="BtnAddToCollMetr" Style="{StaticResource BtnManageBarPlus}" 
+                                    Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
+
+                            <locale:CustomTactForAutoPlay_mini/>
                         </StackPanel>
                         
                     </StackPanel>

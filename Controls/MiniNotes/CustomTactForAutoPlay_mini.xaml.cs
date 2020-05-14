@@ -16,44 +16,38 @@ using static CoordinationTraining.Controls.CustomTact;
 
 namespace CoordinationTraining.Controls.MiniNotes
 {
-    public partial class CustomTact_mini : UserControl
+    public partial class CustomTactForAutoPlay_mini : UserControl
     {
+        enum BTN
+        {
+            BTN_REPEAT_PLUS = 10,
+            BTN_REPEAT_MINUS, 
+            BTN_BPM_PLUS,
+            BTN_BPM_MINUS
+        }
+
         public TactType _type;
+        public int _BPM;
+        public int _repeat;
 
         // не нравится мне это
-        Fourth_mini _fourth;
-        Eight_mini _eigth;
-        Threeol_mini _threeol;
-        Sixteenth_mini _sixteenth;
-        ThirtySecond_mini _thirtysecond;
+        private Fourth_mini _fourth;
+        private Eight_mini _eigth;
+        private Threeol_mini _threeol;
+        private Sixteenth_mini _sixteenth;
+        private ThirtySecond_mini _thirtysecond;
 
-        public CustomTact_mini()
+        public CustomTactForAutoPlay_mini()
+        {
+            _type = TactType.TT_FOURTH;
+            InitializeComponent();
+            InitTT();
+        }
+
+        public CustomTactForAutoPlay_mini(TactType type)
         {
             InitializeComponent();
-        }
 
-        public CustomTact_mini(TactType type)
-        {
-            InitializeComponent();
-
-            AddControll(type);
-        }
-
-        public void SetTact(TactType type)
-        {
-            int _c = GridMain.Children.Count;
-            if (GridMain.Children.Count > 0)
-            {
-                for(int i = 0; i < _c; i++)
-                {
-                    GridMain.Children.Remove(GridMain.Children[i]);
-                }
-            }
-            AddControll(type);
-        }
-    
-        private void AddControll(TactType type)
-        {
             _type = type;
             switch (type)
             {
@@ -101,6 +95,77 @@ namespace CoordinationTraining.Controls.MiniNotes
                         break;
                     }
             }
+
+        }
+
+        private void btnRepeatCount_Click(object sender, RoutedEventArgs e)
+        {
+            //bool heh = ((Button)sender).IsPressed;
+            //while(btnMinusBPMCount.IsPressed)
+            //{
+            //    SumBPMCount(1);
+            //}
+            BTN id = (BTN)Convert.ToInt32(((Button)sender).Uid);
+            switch (id)
+            {
+                case BTN.BTN_REPEAT_PLUS:
+                    SumRepeatCount(1);
+                    break;
+                case BTN.BTN_REPEAT_MINUS:
+                    SumRepeatCount(-1);
+                    break;
+                case BTN.BTN_BPM_PLUS:
+                    SumBPMCount(1);
+                    break;
+                case BTN.BTN_BPM_MINUS:
+                    SumBPMCount(-1);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void SumRepeatCount(int _number)
+        {
+            int count = Convert.ToInt32(tbRepeateCount.Text);
+            count += _number;
+            if(count < 1)
+            {
+                count = 1;
+            }
+            if (count > 9)
+            {
+                count = 9;
+            }
+            _repeat = count;
+            tbRepeateCount.Text = count.ToString();
+        }
+
+        void SumBPMCount(int _number)
+        {
+            int count = Convert.ToInt32(tbBPM.Text);
+            count += _number;
+            if (count < 30)
+            {
+                count = 30;
+            }
+            if (count > 300)
+            {
+                count = 300;
+            }
+            _BPM = count;
+            tbBPM.Text = count.ToString();
+        }
+
+        private void SelectedNote_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SelectNoteType snt = new SelectNoteType(this);
+            snt.ShowDialog();
+            InitTT();
+        }
+        void InitTT()
+        {
+            ct.SetTact(_type);
         }
     }
 }

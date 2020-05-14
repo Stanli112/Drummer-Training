@@ -86,6 +86,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MiniNotes\CustomTactForAutoPlay_mini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MiniNotes\CustomTact_mini.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MiniNotes\NoteMini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MiniNotes\SelectNoteType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +159,9 @@
     <Compile Include="Controls\Fourth.xaml.cs">
       <DependentUpon>Fourth.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MiniNotes\CustomTactForAutoPlay_mini.xaml.cs">
+      <DependentUpon>CustomTactForAutoPlay_mini.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MiniNotes\CustomTact_mini.xaml.cs">
       <DependentUpon>CustomTact_mini.xaml</DependentUpon>
     </Compile>
@@ -162,6 +173,9 @@
     </Compile>
     <Compile Include="Controls\MiniNotes\NoteMini.xaml.cs">
       <DependentUpon>NoteMini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\SelectNoteType.xaml.cs">
+      <DependentUpon>SelectNoteType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MiniNotes\Sixteenth_mini.xaml.cs">
       <DependentUpon>Sixteenth_mini.xaml</DependentUpon>
@@ -215,6 +229,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\cut.wav" />
+    <Content Include="Resources\cut2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\firstBit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\secondBit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\remove.png" />
   </ItemGroup>
   <ItemGroup>

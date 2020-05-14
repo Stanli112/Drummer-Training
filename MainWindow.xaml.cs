@@ -113,7 +113,13 @@ namespace CoordinationTraining
 
         /// <summary> Звук метронома - используется в тренеровке </summary>
         private SoundPlayer MetronomeSound;
-        private SoundPlayer MetronomeSound_delete;
+
+        /// <summary> Звук метронома - используется в тренеровке </summary>
+        private SoundPlayer MetronomeFirstBitSound;
+        
+        /// <summary> Звук метронома - используется в тренеровке </summary>
+        private SoundPlayer MetronomeSecondBitSound;
+
         /// <summary> Хранит настройки проекта </summary>        
         private Settings settings = new Settings();
         /// <summary> Выбранное в списке задание </summary>        
@@ -134,11 +140,18 @@ namespace CoordinationTraining
 
             GetControlsData(settings);
 
+
+            /// загрузка звуков
             MetronomeSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
             MetronomeSound.Load();
 
-            MetronomeSound_delete = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\cut.wav");
-            MetronomeSound_delete.Load();
+            MetronomeFirstBitSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\firstBit.wav");
+            MetronomeFirstBitSound.Load();
+
+            MetronomeSecondBitSound = new SoundPlayer(Directory.GetCurrentDirectory() + "\\Resources\\secondBit.wav");
+            MetronomeSecondBitSound.Load();
+            ///
+
 
             LbTaskColl.ItemsSource = g_PlayListColl;
             GetFirstItemInMaOnWindow();
@@ -231,11 +244,17 @@ namespace CoordinationTraining
             g_PlayListColl.Add(new CoordinationTask(GetLabelOnMainWindow()));
         }
 
+        #endregion
+
+
+
+        #region Metronom
+
         /// <summary> Запускает и останавливает метроном </summary>
         private void PlayMetronom_Click(object sender, RoutedEventArgs e)
         {
             MetronomUsed = !MetronomUsed;
-            Task t = Task.Run(() => 
+            Task t = Task.Run(() =>
             {
                 while (MetronomUsed)
                 {
@@ -245,10 +264,11 @@ namespace CoordinationTraining
                         Dispatcher.Invoke(() => { lblTactCount.Content = ""; });
                     }
                 }
-            });            
+            });
         }
 
         #endregion
+
 
 
         #region Левая менюшка с Амплитудой и Повторами
@@ -372,8 +392,8 @@ namespace CoordinationTraining
         {
             for (int k = 0; k < _bitCount; k++)
             {
-                double kek = 1000 / ((double)settings.BPS / 60 * (int)BPS_type);
-                Thread.Sleep( (int)kek );//settings.Amplitude);
+                double _pause = 1000 / ((double)settings.BPS / 60 * (int)BPS_type);
+                Thread.Sleep( (int)_pause );
                 MetronomeSound.Play();
                 Dispatcher.Invoke(() =>
                 {
@@ -594,14 +614,6 @@ namespace CoordinationTraining
         private void cbNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BPS_type = ((CustomTact_mini)(sender as ComboBox).SelectedItem)._type;
-        }
-
-        private async void BtnAddToCollMetr_Click(object sender, RoutedEventArgs e)
-        {
-            // хрень 
-            await Task.Run(() => MetronomeSound.PlayLooping());
-            Thread.Sleep(300);
-            await Task.Run(() => MetronomeSound_delete.PlayLooping());
         }
     }
 }
