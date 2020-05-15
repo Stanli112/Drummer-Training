@@ -129,13 +129,15 @@
             </Grid.ColumnDefinitions>
 
             <Rectangle Grid.ColumnSpan="3" Grid.RowSpan="3" RadiusX="15" RadiusY="15" Stroke="#2196F3" Fill="WhiteSmoke" StrokeThickness="2"/>
-
+            
+            <!-- Разделитнльныйолосы -->
             <Grid Grid.Column="1" Grid.Row="2" Background="#2196F3"/>
             <Grid Grid.ColumnSpan="3" Grid.Row="1" Background="#2196F3"/>
 
+            
             <Grid Grid.Row="0" Grid.ColumnSpan="3">
 
-                <Button x:Name="btnPlusBPMCount" x:Uid="12" Style="{StaticResource BtnPlay}"
+                <Button x:Name="btnPlusBPMCount" x:Uid="12" Style="{StaticResource BtnPlay}" Opacity="0"
                     VerticalAlignment="Center" HorizontalAlignment="Left" Click="btnRepeatCount_Click"
                     Margin="15,3,0,0" RenderTransformOrigin="0.5,0.5" ToolTip="Plus" >
                     <Button.RenderTransform>
@@ -145,7 +147,7 @@
                     </Button.RenderTransform>
                 </Button>
 
-                <Button x:Name="btnMinusBPMCount" x:Uid="13" Style="{StaticResource BtnPlay}"
+                <Button x:Name="btnMinusBPMCount" x:Uid="13" Style="{StaticResource BtnPlay}" Opacity="0"
                     VerticalAlignment="Center" HorizontalAlignment="Right" Click="btnRepeatCount_Click"
                     Margin="0,3,15,0" ToolTip="Minus"/>
 
@@ -163,7 +165,7 @@
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Button x:Name="btnPlusRepeatCount" x:Uid="10" Style="{StaticResource BtnPlay}"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0"
                     Margin="8,2" RenderTransformOrigin="0.5,0.5" Click="btnRepeatCount_Click"
                     ToolTip="Plus">
                     <Button.RenderTransform>
@@ -174,13 +176,21 @@
                 </Button>
 
                 <Button x:Name="btnMinusRepeatCount" x:Uid="11" Style="{StaticResource BtnPlay}"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Opacity="0"
                     Margin="8,2" Click="btnRepeatCount_Click" ToolTip="Minus"/>
 
-
+                <Grid x:Name="GridHelper" Visibility="Hidden">
+                    <TextBox x:Name="tbHelper" Text="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                             FontSize="20" BorderThickness="0,0,0,0" Background="Transparent" 
+                             FontWeight="Bold" IsReadOnly="True" Margin="5,0" Foreground="#FF00AE"/>
+                    <TextBox Text="~" VerticalAlignment="Center" HorizontalAlignment="Left"
+                             FontSize="10" BorderThickness="0,0,0,0" Background="Transparent" 
+                             FontWeight="Bold" IsReadOnly="True" Margin="16,0" Foreground="#FF00AE"/>
+                </Grid>
+                
                 <TextBox x:Name="tbRepeateCount" Text="4" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     FontSize="20" BorderThickness="0,0,0,0" Background="Transparent" 
-                     FontWeight="Bold" IsReadOnly="True"/>
+                         FontSize="20" BorderThickness="0,0,0,0" Background="Transparent" 
+                         FontWeight="Bold" IsReadOnly="True"/>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="2">
@@ -188,6 +198,12 @@
                 <Button MouseDoubleClick="SelectedNote_MouseDoubleClick"
                         Style="{StaticResource BtnSelectNote}" ToolTip="Double click -> switch note"/>
             </Grid>
+
+
+            <Rectangle x:Name="recEnable" Grid.ColumnSpan="3" Grid.RowSpan="3" 
+                       RadiusX="15" RadiusY="15" Stroke="#2196F3" Fill="Green" 
+                       StrokeThickness="2" Opacity="0.3" Visibility="Hidden"/>
+            
         </Grid>
         
     </Grid>

@@ -32,7 +32,7 @@ namespace CoordinationTraining
     {
         public TactType BPS_type;
         const string lblMainBeat = "Beat creator";
-        const string lblMainCoor = "Coordination training";
+        const string lblMainCoor = "Metronom";
         #region Title
         /// <summary> Свернуть окно </summary>
         private void BtnWindowWrap_Click(object sender, RoutedEventArgs e)
@@ -106,6 +106,8 @@ namespace CoordinationTraining
         /// <summary> Для запуска/остановки метронома </summary>
         bool MetronomUsed = false;
 
+        /// <summary> Повтор метронома </summary>
+        bool RepeateMetronomList = false;
 
         private readonly int BitCount = 12;
         /// <summary> Количество тактов в одном промежутке (4) </summary>
@@ -127,6 +129,11 @@ namespace CoordinationTraining
 
         private ObservableCollection<CoordinationTask> g_PlayListColl = new ObservableCollection<CoordinationTask>();
 
+
+        /// <summary> Нужно её переделать по текущую коллекцию и сделать ещё одну глобальную </summary>
+        private ObservableCollection<CustomTactForAutoPlay_mini> selectedListMetroColl = new ObservableCollection<CustomTactForAutoPlay_mini>();
+        private ObservableCollection<ObservableCollection<CustomTactForAutoPlay_mini>> g_PlayListMetroColl
+            = new ObservableCollection<ObservableCollection<CustomTactForAutoPlay_mini>>();
 
         public MainWindow()
         {
@@ -163,6 +170,8 @@ namespace CoordinationTraining
                 cbNotes.Items.Add(new CustomTact_mini(type));
             }
             cbNotes.SelectedItem = cbNotes.Items[0];
+            
+            SetRepeateMetronomListState(RepeateMetronomList);
         }
 
         #region Coordination Training
@@ -618,7 +627,54 @@ namespace CoordinationTraining
 
         private void BtnAddToCollMetr_Click(object sender, RoutedEventArgs e)
         {
-            _testCustom.Play();
+            CustomTactForAutoPlay_mini customTact 
+                = new CustomTactForAutoPlay_mini(TactType.TT_EIGHTH, MetronomeFirstBitSound, MetronomeSecondBitSound);
+
+            selectedListMetroColl.Add(customTact);
+            spMetroColl.Children.Add(customTact);
+        }
+
+        private void btnPlayMetronomList_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() => 
+            {
+                do
+                {
+                    foreach (CustomTactForAutoPlay_mini customTact in selectedListMetroColl)
+                    {
+                        customTact.Play();
+                    }
+                } while (RepeateMetronomList);
+            });            
+        }
+
+        private void BtnRepeateMetrList_Click(object sender, RoutedEventArgs e)
+        {
+            RepeateMetronomList = !RepeateMetronomList;
+            SetRepeateMetronomListState(RepeateMetronomList);
+        }
+        /// <summary> меняем стиль у кнопки </summary>
+        /// <param name="_state"> передавай переменную, отвечающую за повтор листа метронома </param>
+        void SetRepeateMetronomListState(bool _state)
+        {
+            if(_state)
+            {
+                BtnRepeateMetrList.Style = (Style)BtnRepeateMetrList.FindResource("BtnCheckBox_True");   
+            }
+            else
+            {
+                BtnRepeateMetrList.Style = (Style)BtnRepeateMetrList.FindResource("BtnCheckBox_False");   
+            }
+        }
+
+        private void btnSaveMetroColl_Click(object sender, RoutedEventArgs e)
+        {
+            g_PlayListMetroColl.Add(selectedListMetroColl);
+
+            CustomTactForAutoPlay_mini.Save(g_PlayListMetroColl);
+
+            selectedListMetroColl = new ObservableCollection<CustomTactForAutoPlay_mini>();
+            spMetroColl.Children.Clear();
         }
     }
 }

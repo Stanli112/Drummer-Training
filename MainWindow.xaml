@@ -161,6 +161,47 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style TargetType="{x:Type Button}" x:Key="BtnSave">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid >
+
+                            <Rectangle x:Name="mainBorder" Fill="#2196F3" Width="24" Height="25" RadiusX="3" RadiusY="3" />
+
+                            <Rectangle x:Name="TopBorder" Fill="#3E3E42" Width="16" Height="8" RadiusX="2" RadiusY="2" 
+                                       VerticalAlignment="Top" Margin="0, 4, 0, 0"/>
+                            <Rectangle x:Name="BottomBorder" Fill="#3E3E42" Width="20" Height="10" RadiusX="3" RadiusY="3" 
+                                       VerticalAlignment="Bottom" Margin="0, 0, 0, 5"/>
+
+                            <Polygon Fill="#3E3E42" Points="20,0,   30,0,   30,9"/>
+                            <Polyline x:Name="smallBorder" Stroke="#2196F3" Points="19,6,   19,10"  StrokeThickness="1.5"/>
+                            
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="mainBorder" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="TopBorder" Value="#1E1E1E"/>
+                                <Setter Property="Fill" TargetName="BottomBorder" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <!--<Setter Property="Fill" TargetName="smallBorder" Value="Green"/>-->
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <!--<Setter Property="Fill" TargetName="smallBorder" Value="Brown"/>-->
+                                <Setter Property="Fill" TargetName="mainBorder" Value="Brown"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style TargetType="{x:Type Button}" x:Key="BtnSaveRhythm">
             <Setter Property="Width" Value="40"/>
@@ -397,6 +438,72 @@
                                 <Setter Property="Stroke" TargetName="border2" Value="Brown"/>
                             </Trigger>
 
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnCheckBox_False">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="25" Height="25" RenderTransformOrigin=".5,.5">
+
+                            <Rectangle x:Name="border" Stroke="#2196F3" Width="20" Height="20" RadiusX="5" RadiusY="5" StrokeThickness="2"/>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnCheckBox_True">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="25" Height="25" RenderTransformOrigin=".5,.5">
+
+                            <Rectangle x:Name="border" Stroke="#2196F3" Width="20" Height="20" RadiusX="5" RadiusY="5" StrokeThickness="2"/>
+
+                            <Polyline Stroke="#00BC00" Points="7,8,   12,15,  25,0"  StrokeThickness="3"/>
+                            
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                            </Trigger>
 
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -778,13 +885,23 @@
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button x:Name="btnPlayMetronomList" Style="{StaticResource BtnPlay}" 
-                                    Margin="5,0" ToolTip="Запустить/Отключить метроном" />
+                                    Margin="5,0" ToolTip="Запустить/Отключить метроном" Click="btnPlayMetronomList_Click"/>
                             <Button x:Name="BtnAddToCollMetr" Style="{StaticResource BtnManageBarPlus}" 
                                     Margin="5,0" ToolTip="Добавить в тренировочный лист" Click="BtnAddToCollMetr_Click"/>
-
-                            <locale:CustomTactForAutoPlay_mini x:Name="_testCustom"/>
+                            <Button x:Name="btnSaveMetroColl" Style="{StaticResource BtnSave}" 
+                                    ToolTip="Сохранить ритм" Margin="5, 0" Click="btnSaveMetroColl_Click"/>
+                            <Button x:Name="BtnRepeateMetrList" Style="{StaticResource BtnCheckBox_True}" 
+                                    Margin="5,0" ToolTip="Повторять плейлист?" Click="BtnRepeateMetrList_Click"/>
                         </StackPanel>
-                        
+
+                        <ScrollViewer Grid.Row="1" Margin="50, 15"
+                                          VerticalScrollBarVisibility="Hidden" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalAlignment="Center">
+                            <StackPanel x:Name="spMetroColl" Orientation="Horizontal" HorizontalAlignment="Center"/>
+
+                        </ScrollViewer>
+
                     </StackPanel>
 
 
