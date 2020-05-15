@@ -203,6 +203,9 @@
             </Setter>
         </Style>
 
+        
+
+        
         <Style TargetType="{x:Type Button}" x:Key="BtnSaveRhythm">
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="40"/>
@@ -565,6 +568,43 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style TargetType="{x:Type Button}" x:Key="BtnNew">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid Width="25" Height="25" RenderTransformOrigin=".5,.5">
+
+                            <Rectangle x:Name="border" RadiusX="20" RadiusY="20" Stroke="#2196F3" StrokeThickness="2"/>
+                            <TextBlock x:Name="text" Text="N" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       FontSize="16" Foreground="#2196F3" FontWeight="Bold" Margin="0,0,0,2"/>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="border" Value="#1E1E1E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="border" Value="Green"/>
+                                <Setter Property="Foreground" TargetName="text" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="border" Value="Brown"/>
+                                <Setter Property="Foreground" TargetName="text" Value="Brown"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style TargetType="{x:Type Button}" x:Key="BtnPlayMetronom">
             <Setter Property="Width" Value="30"/>
@@ -887,9 +927,11 @@
                             <Button x:Name="btnPlayMetronomList" Style="{StaticResource BtnPlay}" 
                                     Margin="5,0" ToolTip="Запустить/Отключить метроном" Click="btnPlayMetronomList_Click"/>
                             <Button x:Name="BtnAddToCollMetr" Style="{StaticResource BtnManageBarPlus}" 
-                                    Margin="5,0" ToolTip="Добавить в тренировочный лист" Click="BtnAddToCollMetr_Click"/>
+                                    Margin="5,0" ToolTip="Добавить такт" Click="BtnAddToCollMetr_Click"/>
+                            <Button x:Name="btnSaveMetroNew" Style="{StaticResource BtnNew}" 
+                                    ToolTip="Новьё" Margin="5, 0"/>
                             <Button x:Name="btnSaveMetroColl" Style="{StaticResource BtnSave}" 
-                                    ToolTip="Сохранить ритм" Margin="5, 0" Click="btnSaveMetroColl_Click"/>
+                                    ToolTip="Сохранить" Margin="5, 0" Click="btnSaveMetroColl_Click"/>
                             <Button x:Name="BtnRepeateMetrList" Style="{StaticResource BtnCheckBox_True}" 
                                     Margin="5,0" ToolTip="Повторять плейлист?" Click="BtnRepeateMetrList_Click"/>
                         </StackPanel>
