@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CoordinationTraining.Controls.Sixtennth"
+﻿<UserControl x:Class="CoordinationTraining.Controls.Threeol"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,16 +9,13 @@
              MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="{StaticResource TactSizeWidth}"
              MinHeight="{StaticResource TactSizeHeight}" MinWidth="{StaticResource TactSizeWidth}">
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Rectangle Grid.ColumnSpan="4" Height="3"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="24, 3, 23, 0"/>
-        <Rectangle Grid.ColumnSpan="4" Height="3"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="24, 13, 24, 0"/>
+
+        <Rectangle Grid.ColumnSpan="3" Height="5"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="33, 3"/>
 
         <Grid Grid.Column="0">
             <local:Note HorizontalAlignment="Center"/>
@@ -27,9 +24,6 @@
             <local:Note HorizontalAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="2">
-            <local:Note HorizontalAlignment="Center"/>
-        </Grid>
-        <Grid Grid.Column="3">
             <local:Note HorizontalAlignment="Center"/>
         </Grid>
     </Grid>

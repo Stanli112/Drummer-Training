@@ -5,18 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="360"
-             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="360"
-             MinHeight="{StaticResource TactSizeHeight}" MinWidth="360">
+             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="{StaticResource TactSizeWidth}"
+             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="{StaticResource TactSizeWidth}"
+             MinHeight="{StaticResource TactSizeHeight}" MinWidth="{StaticResource TactSizeWidth}">
     <Grid>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 0"/>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 15, 43, 0"/>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 30, 43, 0"/>
-        <StackPanel Orientation="Horizontal">
-            <local:Fourth/>
-            <local:Fourth/>
-            <local:Fourth/>
-            <local:Fourth/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.ColumnSpan="4" Height="3"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="24, 3, 23, 0"/>
+        <Rectangle Grid.ColumnSpan="4" Height="3"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="24, 10, 24, 0"/>
+        <Rectangle Grid.ColumnSpan="4" Height="3"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="24, 17, 24, 0"/>
+
+        <Grid Grid.Column="0">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="2">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="3">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </UserControl>

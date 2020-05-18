@@ -813,10 +813,6 @@
                 <Grid x:Name="GridMainBeatCreator" Visibility="Hidden">
                     
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="450"/>
-                        </Grid.RowDefinitions>
-
                         <Grid Grid.Row="0">
 
                             <!-- УДОЛИ -->
@@ -846,11 +842,6 @@
                 
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Visible">
                     
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="270"/>
-                    </Grid.ColumnDefinitions>
-
                     <StackPanel x:Name="spMetronom" Orientation="Vertical" VerticalAlignment="Center" >
                         <Label Content="Метроном" HorizontalContentAlignment="Center"
                                    Foreground="#2196F3" FontSize="60" Margin="0,5,0,0"/>
@@ -880,14 +871,14 @@
                             <Button x:Name="BtnAddToCollMetr" Style="{StaticResource BtnManageBarPlus}" 
                                     Margin="5,0" ToolTip="Добавить такт" Click="BtnAddToCollMetr_Click"/>
                             <Button x:Name="btnSaveMetroNew" Style="{StaticResource BtnNew}" 
-                                    ToolTip="Новьё" Margin="5, 0"/>
+                                    ToolTip="Новьё" Margin="5, 0" Click="btnSaveMetroNew_Click"/>
                             <Button x:Name="btnSaveMetroColl" Style="{StaticResource BtnSave}" 
                                     ToolTip="Сохранить" Margin="5, 0" Click="btnSaveMetroColl_Click"/>
                             <Button x:Name="BtnRepeateMetrList" Style="{StaticResource BtnCheckBox_True}" 
                                     Margin="5,0" ToolTip="Повторять плейлист?" Click="BtnRepeateMetrList_Click"/>
                         </StackPanel>
 
-                        <ScrollViewer Grid.Row="1" Margin="50, 15"
+                        <ScrollViewer Grid.Row="1" Margin="50, 15" x:Name="svMetroColl"
                                           VerticalScrollBarVisibility="Hidden" 
                                           HorizontalScrollBarVisibility="Auto"
                                           VerticalAlignment="Center">
@@ -904,7 +895,7 @@
 
 
                     
-                    <Grid Grid.RowSpan="2" Grid.Column="1" Width="270" x:Name="GridRightMenu" 
+                    <!--<Grid Grid.RowSpan="2" Grid.Column="1" Width="270" x:Name="GridRightMenu" 
                           Background="#2D2D30" HorizontalAlignment="Right">
 
                         <Grid.RowDefinitions>
@@ -918,7 +909,7 @@
                             <Label Content="ХЗ" FontSize="20" HorizontalAlignment="Center" Foreground="#1E1E1E"/>
                         </Grid>
 
-                        <!--<ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="3" 
+                        --><!--<ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="3" 
                                  BorderBrush="Transparent" ItemsSource="{Binding g_PlayListColl}" 
                                  SelectionChanged="LbTaskColl_SelectionChanged">
                             <ListBox.ItemTemplate>
@@ -957,9 +948,9 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>-->
+                        </ListBox>--><!--
 
-                        </Grid>
+                        </Grid>-->
                     
                 </Grid>
 

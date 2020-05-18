@@ -5,15 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="180"
-             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="180"
-             MinHeight="{StaticResource TactSizeHeight}" MinWidth="180">
+             d:DesignHeight="{StaticResource TactSizeHeight}" d:DesignWidth="{StaticResource TactSizeWidth}"
+             MaxHeight="{StaticResource TactSizeHeight}" MaxWidth="{StaticResource TactSizeWidth}"
+             MinHeight="{StaticResource TactSizeHeight}" MinWidth="{StaticResource TactSizeWidth}">
     <Grid>
 
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="6"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="43, 0"/>
-        <StackPanel Orientation="Horizontal">
-            <local:Fourth/>
-            <local:Fourth/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Rectangle Grid.ColumnSpan="2" Height="5"  VerticalAlignment="Top" Fill="{DynamicResource HiHat_CB}" Margin="50, 3"/>
+
+        <Grid Grid.Column="0">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <local:Note HorizontalAlignment="Center"/>
+        </Grid>
+        
     </Grid>
 </UserControl>

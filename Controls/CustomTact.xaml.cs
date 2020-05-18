@@ -29,6 +29,7 @@ namespace CoordinationTraining.Controls
         public TactType     Type;
         public Fourth       _fourth;
         public Eighth       _eighth;
+        private Threeol     _threeol;
         public Sixtennth    _sixteenth;
         public ThirtySecond _thirtysecond;
 
@@ -39,6 +40,7 @@ namespace CoordinationTraining.Controls
             Type = TactType.TT_FOURTH;
             _fourth = new Fourth();
             _eighth = new Eighth();
+            _threeol = new Threeol();
             _sixteenth = new Sixtennth();
             _thirtysecond = new ThirtySecond();
 
@@ -57,22 +59,22 @@ namespace CoordinationTraining.Controls
             {
                 case 0:
                     GridNote.Children.Add(_fourth);
-                    GridMain.Width = 90;
                     Type = TactType.TT_FOURTH;
                     break;
                 case 1:
                     GridNote.Children.Add(_eighth);
-                    GridMain.Width = 90 * 2;
                     Type = TactType.TT_EIGHTH;
                     break;
                 case 2:
-                    GridNote.Children.Add(_sixteenth);
-                    GridMain.Width = 90 * 4;
-                    Type = TactType.TT_SIXTEEN;
+                    GridNote.Children.Add(_threeol);
+                    Type = TactType.TT_THREEOL;
                     break;
                 case 3:
+                    GridNote.Children.Add(_sixteenth);
+                    Type = TactType.TT_SIXTEEN;
+                    break;
+                case 4:
                     GridNote.Children.Add(_thirtysecond);
-                    GridMain.Width = 90 * 4;
                     Type = TactType.TT_SIXTEEN;
                     break;
                 default:

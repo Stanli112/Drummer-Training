@@ -4,23 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoordinationTraining.Controls"
+             xmlns:locale="clr-namespace:CoordinationTraining.Controls.MiniNotes"
              mc:Ignorable="d" 
-             d:DesignHeight="{StaticResource CustomTactSizeHeight}" d:DesignWidth="90"
-             MaxHeight="{StaticResource CustomTactSizeHeight}" MaxWidth="360"
-             MinHeight="{StaticResource CustomTactSizeHeight}" MinWidth="90">
+             d:DesignHeight="{StaticResource CustomTactSizeHeight}" d:DesignWidth="{StaticResource TactSizeWidth}"
+             MaxHeight="{StaticResource CustomTactSizeHeight}" MaxWidth="{StaticResource TactSizeWidth}"
+             MinHeight="{StaticResource CustomTactSizeHeight}" MinWidth="{StaticResource TactSizeWidth}">
     <Grid x:Name="GridMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox Name="NoteChoise" Grid.Row="0" Width="90" Height="25" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox Name="NoteChoise" Grid.Row="0" Width="90" Height="25" SelectionChanged="ComboBox_SelectionChanged" Visibility="Hidden">
             <ComboBoxItem Content="Fourth" IsSelected="True"/>
             <ComboBoxItem Content="Eighth"/>
+            <ComboBoxItem Content="Threeol"/>
             <ComboBoxItem Content="Sixteenth"/>
             <ComboBoxItem Content="Thirty Sec"/>
         </ComboBox>
 
+        <locale:CustomTactForAutoPlay_mini/>
+        
         <Grid x:Name="GridNote" Grid.Row="2">
             <local:Fourth/>
         </Grid>

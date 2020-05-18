@@ -330,6 +330,11 @@ namespace CoordinationTraining
 
         private void BtnAddToCollMetr_Click(object sender, RoutedEventArgs e)
         {
+            //if(spMetroColl.Children.Count > 6)
+            //{
+            //    return;
+            //}
+
             CustomTactForAutoPlay_mini customTact 
                 = new CustomTactForAutoPlay_mini(TactType.TT_EIGHTH, MetronomeFirstBitSound, MetronomeSecondBitSound);
 
@@ -339,6 +344,7 @@ namespace CoordinationTraining
 
         private void btnPlayMetronomList_Click(object sender, RoutedEventArgs e)
         {
+            int i = 0;
             Task.Run(() => 
             {
                 do
@@ -346,6 +352,11 @@ namespace CoordinationTraining
                     foreach (CustomTactForAutoPlay_mini customTact in selectedListMetroColl)
                     {
                         customTact.Play();
+                        Dispatcher.Invoke(() => 
+                        {
+                            svMetroColl.ScrollToHorizontalOffset(130 * i);
+                        });
+                        i++;
                     }
                 } while (RepeateMetronomList);
             });            
@@ -378,6 +389,10 @@ namespace CoordinationTraining
 
             selectedListMetroColl = new ObservableCollection<CustomTactForAutoPlay_mini>();
             spMetroColl.Children.Clear();
+        }
+
+        private void btnSaveMetroNew_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

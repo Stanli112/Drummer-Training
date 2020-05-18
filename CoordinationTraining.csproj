@@ -126,6 +126,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Note.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Resources\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ThirtySecond.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Threeol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,6 +198,9 @@
     <Compile Include="Controls\MiniNotes\Threeol_mini.xaml.cs">
       <DependentUpon>Threeol_mini.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Note.xaml.cs">
+      <DependentUpon>Note.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Rhythm.xaml.cs">
       <DependentUpon>Rhythm.xaml</DependentUpon>
     </Compile>
@@ -198,6 +209,9 @@
     </Compile>
     <Compile Include="Controls\ThirtySecond.xaml.cs">
       <DependentUpon>ThirtySecond.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Threeol.xaml.cs">
+      <DependentUpon>Threeol.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

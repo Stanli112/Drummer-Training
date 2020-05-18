@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CoordinationTraining.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для Fourth.xaml
+    /// Логика взаимодействия для Threeol.xaml
     /// </summary>
-    public partial class Fourth : UserControl
+    public partial class Threeol : UserControl
     {
-        public Fourth()
+        public Threeol()
         {
             InitializeComponent();
         }
