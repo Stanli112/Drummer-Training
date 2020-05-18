@@ -9,8 +9,9 @@
         xmlns:locale="clr-namespace:CoordinationTraining.Controls.MiniNotes"     
         mc:Ignorable="d"
         Closed="Window_Closed"
-        MinWidth="1200" MinHeight="800"
-        Title="MyManager" Height="800" Width="1500"
+        MinWidth="1200" MinHeight="500"
+        Height="500" Width="1200"
+        Title="MyManager" 
         Background="#3E3E42"
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
@@ -736,7 +737,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
-                <!--<RowDefinition Height="50"/>-->
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -785,6 +785,9 @@
 
             </Grid>
 
+            
+            
+            
             <Grid x:Name="GridBar" Grid.Row="1" Grid.ColumnSpan="2"  VerticalAlignment="Top">
 
                 <Grid x:Name="GridBarBeatCreator" Background="#2D2D30">
@@ -795,39 +798,14 @@
                         <Button x:Name="btnSaveRythm" Style="{StaticResource BtnSaveRhythm}" 
                                 ToolTip="Сохранить ритм" Margin="5, 0" Click="btnSaveRythm_Click"/>
 
-                        <Grid Width="50"/>
-
-                        <Button x:Name="btnAddBreak" Style="{StaticResource BtnAddBreak}" 
-                                ToolTip="Добавить сбивку(break)" Margin="5, 0" Click="btnAddBreak_Click"/>
-                        <Button x:Name="btnSaveBreak" Style="{StaticResource BtnSaveBreak}"  
-                                ToolTip="Сохранить сбивку(break)" Margin="5, 0"/>
-
                     </StackPanel>
-                </Grid>
-                
-                <Grid x:Name="GridBarCoordTrening" Visibility="Visible">
-                    
-                    
-                
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-
-                        
-
-
-                    </StackPanel>
-
-                    <Grid HorizontalAlignment="Right" Width="270">
-
-                    <!--<Button x:Name="BtnRightMenu" HorizontalAlignment="Right" 
-                            Width="35" Height="35" Margin="0, 0, 10, 0" Click="RightMenu_Click" 
-                            Style="{StaticResource BtnManageRightMenu}"/>-->
-
-                    </Grid>
-                    
-                </Grid>
+                </Grid>    
                 
             </Grid>
 
+            
+            
+            
             
 
             <Grid Grid.Row="1" Grid.Column="0">
@@ -837,14 +815,9 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="450"/>
-                            <RowDefinition Height="450"/>
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
 
                             <!-- УДОЛИ -->
                             <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" Visibility="Hidden">
@@ -867,38 +840,18 @@
 
                         </Grid>
 
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Label Content="Сбивка (Break)" FontSize="30" HorizontalAlignment="Center" Foreground="White"/>
-                            <ScrollViewer Grid.Row="1" 
-                                          VerticalScrollBarVisibility="Hidden" 
-                                          HorizontalScrollBarVisibility="Auto"
-                                          VerticalAlignment="Center">
-                                <StackPanel x:Name="spBreak" Orientation="Horizontal" HorizontalAlignment="Center"/>
-                            </ScrollViewer>
-                        </Grid>
-
                     </Grid>
 
                 </Grid>
                 
                 <Grid x:Name="GridMainCoordTreaning" Visibility="Visible">
                     
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="300"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="270"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0" x:Name="spMetronom" Orientation="Vertical" VerticalAlignment="Top" >
+                    <StackPanel x:Name="spMetronom" Orientation="Vertical" VerticalAlignment="Center" >
                         <Label Content="Метроном" HorizontalContentAlignment="Center"
                                    Foreground="#2196F3" FontSize="60" Margin="0,5,0,0"/>
                         
@@ -907,18 +860,16 @@
                             <Button x:Name="BtnBPSMinus" Width="25" Height="25" Style="{StaticResource BtnManageBarMinus}" 
                                 Click="BtnBPS_Click"/>
 
-                            <TextBox x:Name="txtBPS" Width="40" MaxLength="3" VerticalAlignment="Center" Text="60"
-                                 Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" ToolTip="Beat per second"/>
+                            <TextBox x:Name="txtBPM" Width="40" MaxLength="3" VerticalAlignment="Center" Text="60"
+                                 Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" ToolTip="Beat per minut"/>
 
                             <Button x:Name="BtnBPSPlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnBPS_Click"/>
 
-                            <ComboBox Name="cbNotes" Width="100" Height="30" Margin="15,0" SelectionChanged="cbNotes_SelectionChanged"/>
+                            <locale:CustomTactSelected x:Name="ccNotes" Margin="10,5,5,5"/>
 
                             <Button x:Name="PlayMetronom" Style="{StaticResource BtnPlay}" 
                                     Margin="5,0" ToolTip="Запустить/Отключить метроном" Click="PlayMetronom_Click"/>
-                            <!--<Button x:Name="BtnAddToCollMetr" Click="BtnAddToCollMetr_Click" Style="{StaticResource BtnManageBarPlus}" 
-                                    Margin="5,0" ToolTip="Добавить в тренировочный лист"/>-->
-                            
+
                         </StackPanel>
 
                         <Grid Background="#2196F3" Height="3" Margin="150, 10"/>
@@ -952,140 +903,22 @@
                                Style="{StaticResource MainLbl}" FontSize="80" Margin="0,0,0,30" Foreground="#2196F3" Visibility="Hidden"/>
 
 
-                    <StackPanel Grid.Row="1" x:Name="spCoord" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
-
-                        <Label Content="Координация" HorizontalContentAlignment="Center"
-                                   Foreground="#2196F3" FontSize="60" Margin="0,20,0,0"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="BtnAmplitudeMinus" Width="25" Height="25" Style="{StaticResource BtnManageBarMinus}"
-                                Click="BtnSAmplitude_Click"/>
-
-                            <TextBox x:Name="txtAmplitude" Width="40" MaxLength="3" VerticalAlignment="Center" Text="1,0"
-                                 Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" ToolTip="Такт ( Частота ) "/>
-
-                            <Button x:Name="BtnAmplitudePlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnSAmplitude_Click"
-                                    Margin="0,0,20,0"/>
-
-
-                            <Button x:Name="BtnRepeatMinus" Width="25" Height="25" Style="{StaticResource BtnManageBarMinus}"
-                                Click="BtnSRepeat_Click"/>
-
-                            <TextBox x:Name="txtRepeat" Width="25" MaxLength="1" VerticalAlignment="Center" Text="2" 
-                                 Style="{StaticResource TbMinManageBarCount}" IsReadOnly="True" Margin="5,0" />
-
-                            <Button x:Name="BtnRepeatPlus" Style="{StaticResource BtnManageBarPlus}" Click="BtnSRepeat_Click"
-                                    Margin="0,0,20,0"/>
-
-                            <Button x:Name="PlayStop" Click="PlayStop_Click" Style="{StaticResource BtnPlay}" 
-                                Margin="5,0" ToolTip="Начать тренировку"/>
-
-                            <Button x:Name="BtnRandom" Click="BtnRandom_Click" Style="{StaticResource BtnRandom}" 
-                                Margin="5,0" ToolTip="Обновить тренировку"/>
-
-                            <Button x:Name="BtnAddToColl" Click="BtnAddToColl_Click" Style="{StaticResource BtnManageBarPlus}" 
-                                Margin="5,0" ToolTip="Добавить в тренировочный лист"/>
-                        </StackPanel>
-
-                        <Grid x:Name="GridHand" >
-
-                            <Label Content="Р:" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                                       Style="{StaticResource MainLbl}" FontSize="60" Margin="0,0,0,30"/>
-
-                            <StackPanel x:Name="spHand" Orientation="Horizontal" VerticalAlignment="Bottom" 
-                                    HorizontalAlignment="Left" Margin="100,0,0,0">
-
-                                <Label x:Name="H1" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H2" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H3" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H4" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
-
-                                <Label x:Name="H5" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H6" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H7" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H8" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
-
-                                <Label x:Name="H9" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H10" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H11" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="H12" Content="R" Style="{StaticResource MainLbl}"/>
-
-                            </StackPanel>
-
-                        </Grid>
-
-                        <Grid x:Name="GridLeg">
-
-                            <Label Content="Н:" VerticalAlignment="Top" HorizontalAlignment="Left" 
-                                       Style="{StaticResource MainLbl}" FontSize="60" Margin="0, 40, 0, 0"/>
-
-                            <StackPanel x:Name="spLeg" Orientation="Horizontal" VerticalAlignment="Top"
-                                    HorizontalAlignment="Left" Margin="100,0,0,0">
-
-                                <Label x:Name="L1" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L2" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L3" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L4" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
-
-                                <Label x:Name="L5" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L6" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L7" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L8" Content="R" Style="{StaticResource MainLbl}" Margin="0,0,50,0"/>
-
-                                <Label x:Name="L9" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L10" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L11" Content="R" Style="{StaticResource MainLbl}"/>
-                                <Label x:Name="L12" Content="R" Style="{StaticResource MainLbl}"/>
-
-                            </StackPanel>
-                        </Grid>
-
-                    </StackPanel>
                     
                     <Grid Grid.RowSpan="2" Grid.Column="1" Width="270" x:Name="GridRightMenu" 
                           Background="#2D2D30" HorizontalAlignment="Right">
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="200"/>
-                            <RowDefinition Height="40"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                        
+                        
 
                         <Grid Grid.Row="0" Background="#2196F3">
-                            <Label Content="Настройки" FontSize="20" HorizontalAlignment="Center" Foreground="#1E1E1E"/>
+                            <Label Content="ХЗ" FontSize="20" HorizontalAlignment="Center" Foreground="#1E1E1E"/>
                         </Grid>
 
-                        <Grid Grid.Row="1">
-                            <StackPanel Orientation="Vertical">
-                                <Grid Height="50">
-                                    <TextBlock Text="Использовать метроном в начале тренировки"
-                                               Style="{StaticResource tbSettingsMenu}"/>
-                                    <CheckBox x:Name="cbMetronom"  Margin="220,0,0,0"
-                                              VerticalAlignment="Center" HorizontalAlignment="Left"
-                                              Click="cbMetronom_Click"/>
-                                </Grid>
-
-                                <Grid Background="#2196F3" Height="1"/>
-
-                                <Grid Height="50">
-                                    <TextBlock Text="Подсветка текста при тренеровке"
-                                               Style="{StaticResource tbSettingsMenu}"/>
-                                    <xctk:ColorPicker Name="cpIllumination" Width="40" Height="20"
-                                                      HorizontalAlignment="Left" Margin="210,0,0,0"
-                                                      SelectedColorChanged="cpIllumination_SelectedColorChanged"/>
-
-                                </Grid>
-
-                                <Grid Background="#2196F3" Height="1"/>
-                            
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid Grid.Row="2" Background="#2196F3">
-                            <Label Content="Свой лист (Коорд)" FontSize="20" HorizontalAlignment="Center" Foreground="#1E1E1E"/>
-                        </Grid>
-
-                        <ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="3" 
+                        <!--<ListBox x:Name="LbTaskColl" Background="Transparent" Grid.Row="3" 
                                  BorderBrush="Transparent" ItemsSource="{Binding g_PlayListColl}" 
                                  SelectionChanged="LbTaskColl_SelectionChanged">
                             <ListBox.ItemTemplate>
@@ -1124,7 +957,7 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>
+                        </ListBox>-->
 
                         </Grid>
                     

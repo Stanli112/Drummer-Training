@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="CoordinationTraining.Controls.MiniNotes.CustomTactSelected"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoordinationTraining.Controls.MiniNotes"
+             mc:Ignorable="d" 
+             MinWidth="80" MinHeight="30"
+             MaxWidth="80" MaxHeight="30">
+
+    <UserControl.Resources>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnSelectNote">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Opacity" Value="0.1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+
+                        <Grid x:Name="border" Background="Transparent"/>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Red"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Red"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="Red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    <Grid>
+
+        <Rectangle RadiusX="5" RadiusY="5" Stroke="#2196F3" Fill="WhiteSmoke" StrokeThickness="2"/>
+
+        <local:CustomTact_mini x:Name="ct" Margin="5,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button MouseDoubleClick="SelectedNote_MouseDoubleClick"
+                        Style="{StaticResource BtnSelectNote}" ToolTip="Double click -> switch note"/>
+    </Grid>
+</UserControl>

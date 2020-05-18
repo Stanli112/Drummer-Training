@@ -90,6 +90,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MiniNotes\CustomTactSelected.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MiniNotes\CustomTact_mini.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,10 +150,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\CoordinationTask.cs" />
-    <Compile Include="Classes\OneBit.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <Compile Include="Controls\Casses\Tact.cs" />
     <Compile Include="Controls\CustomTact.xaml.cs">
       <DependentUpon>CustomTact.xaml</DependentUpon>
     </Compile>
@@ -161,6 +162,9 @@
     </Compile>
     <Compile Include="Controls\MiniNotes\CustomTactForAutoPlay_mini.xaml.cs">
       <DependentUpon>CustomTactForAutoPlay_mini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MiniNotes\CustomTactSelected.xaml.cs">
+      <DependentUpon>CustomTactSelected.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MiniNotes\CustomTact_mini.xaml.cs">
       <DependentUpon>CustomTact_mini.xaml</DependentUpon>
@@ -244,6 +248,7 @@
     <Resource Include="Resources\remove.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\Casses\" />
     <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
