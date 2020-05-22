@@ -20,12 +20,14 @@ namespace CoordinationTraining.Controls.MiniNotes
         enum KOSTIL
         {
             first, 
-            second
+            second,
+            third
         }
 
         KOSTIL kostil;
         CustomTactForAutoPlay_mini _losc;
         CustomTactSelected _cts;
+        CustomTact _ct;
 
         public SelectNoteType()
         {
@@ -44,6 +46,14 @@ namespace CoordinationTraining.Controls.MiniNotes
             _cts = ll;
             InitializeComponent();
         }
+
+        public SelectNoteType(CustomTact ll)
+        {
+            kostil = KOSTIL.third;
+            _ct = ll;
+            InitializeComponent();
+        }
+
         private void lbNotes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lbNotes.SelectedItem != null)
@@ -56,6 +66,10 @@ namespace CoordinationTraining.Controls.MiniNotes
 
                     case KOSTIL.second:
                         _cts._type = (TactType)(lbNotes.SelectedIndex + 1);
+                        break;
+
+                    case KOSTIL.third:
+                        _ct.Type = (TactType)(lbNotes.SelectedIndex + 1);
                         break;
 
                     default:

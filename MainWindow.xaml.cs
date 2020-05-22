@@ -310,13 +310,6 @@ namespace CoordinationTraining
 
         private void btnSaveRythm_Click(object sender, RoutedEventArgs e)
         {
-            if(tbNameRhythm.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Придумай название!", "Warning", MessageBoxButton.OK); 
-                tbNameRhythm.Focus();
-                return;
-            }
-
             ObservableCollection<Rhythm> rColl = new ObservableCollection<Rhythm>();
             foreach (object child in spRhythm.Children)
             {
@@ -344,17 +337,18 @@ namespace CoordinationTraining
 
         private void btnPlayMetronomList_Click(object sender, RoutedEventArgs e)
         {
-            int i = 0;
+            int i;
             Task.Run(() => 
             {
                 do
                 {
+                    i = 0;
                     foreach (CustomTactForAutoPlay_mini customTact in selectedListMetroColl)
                     {
                         customTact.Play();
                         Dispatcher.Invoke(() => 
                         {
-                            svMetroColl.ScrollToHorizontalOffset(130 * i);
+                            svMetroColl.ScrollToHorizontalOffset(260 * i);
                         });
                         i++;
                     }

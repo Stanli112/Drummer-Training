@@ -114,7 +114,7 @@
 
     </UserControl.Triggers>
     
-    <Grid  >
+    <Grid>
 
         <Grid x:Name="GridMain">
             <Grid.RowDefinitions>

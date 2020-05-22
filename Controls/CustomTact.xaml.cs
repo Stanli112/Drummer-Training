@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoordinationTraining.Controls.MiniNotes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,26 +28,31 @@ namespace CoordinationTraining.Controls
         }
 
         public TactType     Type;
-        public Fourth       _fourth;
-        public Eighth       _eighth;
-        private Threeol     _threeol;
-        public Sixtennth    _sixteenth;
-        public ThirtySecond _thirtysecond;
+        private Fourth          _fourth;
+        private Eighth          _eighth;
+        private Threeol         _threeol;
+        private Sixtennth       _sixteenth;
+        private ThirtySecond    _thirtysecond;
 
         public CustomTact()
         {
             InitializeComponent();
 
             Type = TactType.TT_FOURTH;
-            _fourth = new Fourth();
-            _eighth = new Eighth();
-            _threeol = new Threeol();
-            _sixteenth = new Sixtennth();
-            _thirtysecond = new ThirtySecond();
+            _fourth         = new Fourth();
+            _eighth         = new Eighth();
+            _threeol        = new Threeol();
+            _sixteenth      = new Sixtennth();
+            _thirtysecond   = new ThirtySecond();
 
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ccNotes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NoteChanged(ccNotes._type);
+        }
+
+        private void NoteChanged(TactType type)
         {
             if (GridNote == null)
             {
@@ -55,25 +61,25 @@ namespace CoordinationTraining.Controls
 
             GridNote.Children.Remove(GridNote.Children[0]);
 
-            switch (NoteChoise.SelectedIndex)
+            switch (type)
             {
-                case 0:
+                case TactType.TT_FOURTH:
                     GridNote.Children.Add(_fourth);
                     Type = TactType.TT_FOURTH;
                     break;
-                case 1:
+                case TactType.TT_EIGHTH:
                     GridNote.Children.Add(_eighth);
                     Type = TactType.TT_EIGHTH;
                     break;
-                case 2:
+                case TactType.TT_THREEOL:
                     GridNote.Children.Add(_threeol);
                     Type = TactType.TT_THREEOL;
                     break;
-                case 3:
+                case TactType.TT_SIXTEEN:
                     GridNote.Children.Add(_sixteenth);
                     Type = TactType.TT_SIXTEEN;
                     break;
-                case 4:
+                case TactType.TT_THIRTYSECOND:
                     GridNote.Children.Add(_thirtysecond);
                     Type = TactType.TT_SIXTEEN;
                     break;
@@ -81,5 +87,6 @@ namespace CoordinationTraining.Controls
                     break;
             }
         }
+
     }
 }
